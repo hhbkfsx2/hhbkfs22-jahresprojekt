@@ -3,6 +3,11 @@ TODO:
 	* Arbeitspackete aus dem Pflichtenheft entfernen
 
 - Vorbereitung für die Umsetzung
+	* Test: Installation KVM-Host Ubuntu 16.04
+	* Test: Installation Windows 2012R2
+	* Test: Installation Ubuntu 16.04
+		- Mailserver
+		- Webserver
 - Dokumentation
 	* Anlegen der Kapitelstruktur
 	* Netzwerkkonzept
