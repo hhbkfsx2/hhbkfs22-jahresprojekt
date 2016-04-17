@@ -1,0 +1,9 @@
+TODO:
+- Pflichtenheft
+	* Arbeitspackete aus dem Pflichtenheft entfernen
+
+- Vorbereitung für die Umsetzung
+- Dokumentation
+	* Anlegen der Kapitelstruktur
+	* Netzwerkkonzept
+	* Projektstrukturplan

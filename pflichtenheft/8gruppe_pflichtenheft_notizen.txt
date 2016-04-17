@@ -1,0 +1,46 @@
+Materialanforderungen:
+	- 1x CISCO Switch
+	- 1x CISCO Router
+	- 1x KVM-Server
+	-- 1x Windows
+	-- 1x Ubuntu
+	--- Webserver
+	--- Mailserver
+	- 2x Client System
+	-- eigene Notebooks
+	- div. Kabel
+
+1. CISCO Geräte
+	- Router Basisconfig (IPv6)
+	- Router SIXXS-Tunnel
+	- Router IPv6 Firewall
+	- Switch Basisconfig (IPv6)
+
+2. Performance- und Funktionalitätsnachweise
+* Netzwerkkomponenten
+	- IPv6 Reinheit
+	- LAN Funktionalität
+	- Tunnel Stabilität
+	- Tunnel Goodwidth
+	- Firewall Test (nmap)
+
+3. Linux Web-/ Mailserver
+    - Erreichbarkeit aus dem Intranet
+    - Erreichbarkeit aus dem Internet
+
+4. Performance- und Funktionalitätsnachweise
+* NAT Inbound
+	- Test Webserver
+	- Test Mailserver
+
+5. Realisierung Microsoft-Umfeld
+	- AD
+	- winbind
+
+
+6. Performance- und Funktionalitätsnachweise
+* Testumgebung
+	- Konnektivität
+	- LAN Performance
+	- Domänen Verfügbarkeit
+	- Authentizierung am AD

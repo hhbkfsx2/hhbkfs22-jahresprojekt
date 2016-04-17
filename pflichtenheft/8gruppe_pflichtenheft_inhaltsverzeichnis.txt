@@ -1,0 +1,37 @@
+\section{Zielbestimmung}
+	Muss-Kriterien
+	Wunschkriterien
+	Abgrenzungskriterien
+\section{Produkteinsatz}
+	Anwendungsbereich
+\section{Produktumgebung}
+	Software
+	Hardware
+	Produktschnittstellen
+\section{Produktfunktionen}
+	.....
+	.....
+	.....
+	.....
+	Nicht umgesetzte Optionen
+\section{Produktdaten}
+	Dokumentationen
+	Quellcode
+	Lauffähiges Programm
+\section{Produktleistungen}
+	Anforderung an die Entwicklung
+	Anforderung an die Anwenderdokumentation
+	Anforderung an die Feinkonzeption("Technische Dokumentationen")
+	Anforderung an die Projektdokumentation ("IHK-Dokumentationen")
+\section{Benutzeroberfläche/ Prototypumgebung}
+\section{Qualitätsbestimmungen}
+\section{Gloable Testfälle}
+\section{Entwicklungsumgebung} 
+	Software
+	Hardware
+\section{Ergänzugen}
+\section{Unsere[Firmennamen ergänzen] Spezifische Anmerkungen}
+	Arbeitsaufteilung
+	Arbeitspakete
+	Diagramme
+	Schnittstellendefinition 

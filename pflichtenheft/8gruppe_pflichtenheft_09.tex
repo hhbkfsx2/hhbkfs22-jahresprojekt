@@ -1,0 +1,5 @@
+\section{Ergänzungen}
+
+
+
+Wenn sich das Projekt erfolgreich realisieren lässt, sind für die Umsetzung in der Produktivumgebung noch einige Punkte zu beachten. Zum einen müssten alle nicht IPv6-fähigen Netzwerkgeräte ausgetauscht werden. Dasselbe gilt auch für alle Clients, wenn diese ihre IPv6-Verbindung nicht über einen internen IPv6-Tunnel realisieren. Als Alternative könnte die gesamte interne IPv4-Infrastruktur erhalten bleiben. Statt eines IPv6-zu-IPv4-Tunnels, wie in diesem Projekt verwendet, würde dann ein IPv4-zu-IPv6-Tunnel genutzt. Zum anderen ergibt sich für beide Umsetzungen ein Sicherheitsrisiko, da der jeweilige IPv4- oder IPv6-Netzwerkverkehr in beiden Fällen über einen zentralen Tunnel-Broker geroutet wird. Das bedeutet, dass in beiden Fällen ein eigener Tunnel-Broker betrieben werden.
