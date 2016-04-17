@@ -1,0 +1,93 @@
+\documentclass[10pt,a4paper,oneside,ngerman]{article}
+
+\usepackage[left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm]{geometry}
+
+\usepackage[utf8]{inputenc}					% this is needed for german umlauts
+\usepackage[ngerman]{babel}					% this is needed for german umlauts
+\usepackage[T1]{fontenc}						% this is needed for correct output 
+                           					% of umlauts in pdf
+
+\usepackage{lmodern}							% Latin Modern
+\renewcommand*\familydefault{\sfdefault}		% Only if the base font of the document is to be sans serif
+\usepackage[T1]{fontenc}
+
+%%% Anfang: Anpassen des Layouts: Kopf- und Fußzeilen %%%
+
+\usepackage{fancyhdr} 
+\pagestyle{fancy} 
+\fancyhf{} 									% alle Kopf- und Fußzeilenfelder bereinigen; 
+											% löscht doppelte Seitenzahlen!
+\fancyhead[L]{} 								% Kopfzeile links
+\fancyhead[C]{}								% zentrierte Kopfzeile
+\fancyhead[R]{} 								% Kopfzeile rechts
+%\fancyhead[LO]{Test}						% Odd: ungerade Seiten
+%\fancyhead[RO]{Test}
+%\fancyhead[CO]{Test}
+%\fancyhead[RE]{Test}						% Even: gerade Seiten
+%\fancyhead[LE]{Test}
+%\fancyhead[CE]{Test}
+\fancyfoot[R]{\thepage} %Seitennummer
+
+%\renewcommand{\headrulewidth}{0.4pt} %obere Trennlinie
+%\renewcommand{\footrulewidth}{0.4pt} %untere Trennlinie
+
+%%% Ende: Anpassen des Layouts: Kopf- und Fußzeilen %%%
+
+\usepackage{graphicx}
+
+\usepackage{color}							% Ermöglicht farbigen Text: \textcolor{declared-color}{text}
+											% Bsp.: \textcolor{red}{Dieser Text ist rot}.
+
+%%% Zeilenabstand %%%
+\usepackage{setspace}
+%\onehalfspacing %auskommentiert wird durchgehend einfacher Zeilenabstand verwendet
+
+\newcommand{\qr}{\textquotedblleft}		% Definiert eine Abkürzung für dt. Anführungsstriche links
+\newcommand{\ql}{\quotedblbase}			% Definiert eine Abkürzung für dt. Anführungsstriche rechts
+
+\newcommand{\tabb}{\begin{tabbing}
+m \= m \= m \= m \= m \= m \= m \= m \= m \= m \= m \kill}
+\newcommand {\tabx}{\end{tabbing}}
+
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{listings}
+
+%%% Nuetzliche Befehle:
+%Behauptung \footnote{Beweis}; wird automatisch durchnummeriert 
+
+%%% Anfang: Generelle Inforationen über das Dokument %%%
+
+\author{Kilian Engelhardt}
+\title{}
+\date{\today}
+
+\usepackage{hyperref}					% Weitere Optionen unter:
+										% http://de.wikibooks.org/wiki/LaTeX-W%C3%B6rterbuch:_hyperref
+\hypersetup{								% Hier werden Informationen für das PDF gesetzt
+pdftitle={},
+pdfauthor={},
+pdfsubject={},
+pdfkeywords={},
+colorlinks=true,							
+linkcolor=black							% Definiert die Farbe der Links vom Inhaltsverzeichnis
+}										% zu den Sections im Dokument
+
+%%% Ende: Generelle Inforationen über das Dokument %%%
+
+\setcounter{secnumdepth}{0} 				% Entfernt Nummerierung im TOC
+
+\begin{document}
+\pagestyle{empty}
+\include{2jahr_jahresprojekt_00_deckblatt}
+\tableofcontents
+\newpage
+\pagestyle{fancy}
+\setcounter{page}{1}
+
+%\include{2jahr_jahresprojekt_01_kapitel1}
+%\include{2jahr_jahresprojekt_02_kapitel2}
+%\include{2jahr_jahresprojekt_03_kapitel3}
+%\include{2jahr_jahresprojekt_04_kapitel4}
+
+\end{document}

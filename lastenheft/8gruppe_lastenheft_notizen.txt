@@ -1,0 +1,82 @@
+Jahresprojekt: Jahr 2 - Lastenheft -------------- K. Engelhardt --- 08.04.2016
+==============================================================================
+1. Ausgangssituation
+
+Auftraggeber: FastForwards GmbH
+- international tätiges Handelsunternehmen
+- Kommunikation mit Kunden und Zulieferern in Fernost durch IPv6 optimierbar
+
+IPv4-Adressknappheit im asiatischen Raum -> erhöhter Bedarf an zeitnaher
+Umsetzung von IPv6-fähigen Netzen. Durch vorzeitige Umsetzung soll Zeitdruck
+vermieden werden. Einführung ist aufgrund von Adressknappheit unumgänglich.
+
+Auftragnehmer: HHBK IT-IHK FS2#
+
+==============================================================================
+2. Zielsetzung
+
+Planung, Inbetriebnahme, Übergabe: IPv6-Implementierun für Segment
+Interne Dienste sollen nur per IPv6 kommunizieren
+Externe Kommunikation durch IPv6-Firewall regulieren
+IPv6-Web + Mailserver sollen angesprochen werden können
+
+==============================================================================
+3. Produkteinsatz
+
+==============================================================================
+4. Funktionale Anforderungen
+
+- ausschließlich IPv6-basiertes Netzsegment
+- verschiedene Client-OS und Server
+- Anbindung an IPv6-Internet via Sixxs-Tunnel
+- IPv6-Firewall
+- Performance- und Funktionsnachweis / Anwendungsszenarien
+
+==============================================================================
+5 Nichtfunktionale Anforderungen
+
+Betriebssysteme:
+	- Kosten
+	- Bedienbarkeit
+	- einfache Wartung
+Kosten sparen durch Verwendung vorhandener Komponenten
+Gemeinsame Nutzung zentraler Komponenten
+
+==============================================================================
+6 Lieferumfang
+
+Einweisung in das Gesamtprodukt zum Abnahmezeitpunkt
+Präsentation erfolgt in Folgewoche
+Projektergebnisse auch in englischer Sprache
+
+Dokumentationen in elektronischer Form auf Moodle:
+	- Projektdokumentation gem. IHK-Vorgabe
+	- Technische Dokumentation -> Wartung/Fehlersuche
+	- Zugangscodes, Passwörter etc in einem eigenen Do
+	- Zugangscodes, Passwörter etc in einem eigenen Docc
+	 
+
+==============================================================================
+7 Projektphasen und Meilensteine
+
+Vorgehensmodell
+Projektphasen
+Zeitplanung
+Meilensteine
+
+-> Pflichtenheft
+
+Durchführungszeitraum
+Abnahmezeitpunkt
+Zeitpunkt der Projektpräsentation
+==============================================================================
+8 Offene Punkte
+
+==============================================================================
+9 Abnahmekriterien und Qualitätsanforderungen
+
+Zum Abnahmetermin Vorführung aller Funktionen
+==============================================================================
+10 Sonstiges
+
+

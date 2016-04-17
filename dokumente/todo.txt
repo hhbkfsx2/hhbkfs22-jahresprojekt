@@ -1,6 +1,8 @@
 TODO:
 - Pflichtenheft
-	* Arbeitspackete aus dem Pflichtenheft entfernen
+	* Produktumgebung
+	* Qualitätsbestimmung
+	* Globale Testfälle
 
 - Vorbereitung für die Umsetzung
 	* Test: Installation KVM-Host Ubuntu 16.04
@@ -8,6 +10,10 @@ TODO:
 	* Test: Installation Ubuntu 16.04
 		- Mailserver
 		- Webserver
+	* Packettracer
+		- Router
+		- Switch
+		- Clients
 - Dokumentation
 	* Anlegen der Kapitelstruktur
 	* Netzwerkkonzept
