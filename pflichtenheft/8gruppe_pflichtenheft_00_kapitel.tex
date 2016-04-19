@@ -74,26 +74,35 @@ Welche Szenarien müssen betrachtet werden?
 
 
 \section{Globale Testfälle}
-Die folgenden Testfälle wurden zur Bestimmung der Funktionalität erstellt.
-\subsection{Funktion in der DMZ}
-\begin{description}
-\item [T01] Ein IPv6 Netzt ist verfügbar.
-\item [T02] Im Netzwerk funktionieren keine IPv4 Konfigurationen.
-\item [T03] Systeme im LAN und WAN sind pingbar.
-\item [T04] Websites können aufgerufen werden.
-\item [T05] Emails können gesendet und empfangen werden
-\end{description}
-\subsection{Funktion des Clienten}
-\begin{description}
-\item [T01] Ein IPv6 Netzt ist verfügbar.
-\item [T02] Im Netzwerk funktionieren keine IPv4 Konfigurationen.
-\item [T03] Systeme in der DMZ und im WAN sind pingbar.
-\item [T04] Websites können aufgerufen werden. (WAN & DMZ)
-\item [T05] Emails können gesendet und empfangen werden.
-\item [T06] Eine Windows Domände ist verfügbar.
-\item [T07] Der Client kann sich gegen die Domände authentifizieren.
-\end{description}
 
+Wir unterscheiden vier Kategorien von globalen Testfällen zur Bestimmung der Funktionalität. Die erste Kategorie umfasst die Funktionen des Mail- und Webserver und die zweite die Funktion des lokalen Netzwerkes. In der dritten Kategorie werden alle Tests zusammengefasst, die den Zugriff der Clients auf die Server betreffen. Abschließend wird in der vierten Kategorie getestet, ob das Netzwerksegment aus dem öffentlichen Internet erreichbar ist und ob die Services in der DMZ genutzt werden können.
+
+\begin{enumerate}
+	\item Mail- und Webserver
+		\begin{itemize}
+			\item[S01] Erreichbarkeit des Mailservers
+			\item[S02] Erreichbarkeit des Webservers
+			\item[S03] Der Webserver kann Mails senden und empfangen
+		\end{itemize}
+	\item Lokales Netzwerk 
+		\begin{itemize}
+			\item[I01] Kommunikation der Server und Clients per IPv6
+			\item[I02] Trennung von Trusted Zone und DMZ per VLAN  
+			\item[I03] Kommunikation per IPv4 findet nicht statt
+		\end{item[]ize}
+	\item Clients
+		\begin{itemize}
+			\item[C01] Kommunikation der Clients mit IPv4-Server im Internet ist möglich
+			\item[C02] Clients können über den Mailserver Emails senden und empfangen
+			\item[C03] (optional) Clients können sich gegen die Windows Domäne authentifizieren
+		\end{itemize}
+	\item Zugriff aus dem Internet
+		\begin{itemize}
+			\item[E01] Mail- und Webserver sind aus dem Internet erreichbar 
+			\item[E02] Clients sind aus dem Internet nicht erreichbar
+			\item[E03] Firewall öffnet nur tatsächlich genutzte Ports 
+		\end{itemize}
+\end{enumerate}
 
 
 \section{Ergänzungen}
