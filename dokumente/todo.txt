@@ -2,8 +2,6 @@ HHBKFS22: Jahresprojekt - Gruppe 8 -------------------------------- 19.04.2016
 ==============================================================================
 TODO:
 - Pflichtenheft
-	* Produktumgebung
-	* Qualitätsbestimmung
 
 - Vorbereitung für die Umsetzung
 	* Test: Installation KVM-Host Ubuntu 16.04
@@ -24,3 +22,5 @@ TODO:
 DONE:
 - Pflichtenheft
 	* Globale Testfälle
+	* Produktumgebung		covered by Produkteinsatz
+	* Qualitätsbestimmung		covered by Globale Testfälle
