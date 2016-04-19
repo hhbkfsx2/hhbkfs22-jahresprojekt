@@ -1,10 +1,8 @@
 \section{Produktfunktionen}
 
-Im Rahmen des Projektes wird ein Segement des Netzwerkes der FastForward GmbH per IPv6 mit dem Internet verbunden. Damit Verbindungen zum IPv4-Internet möglich sind, wird ein Tunnel-Broker verwendet. Wir haben uns für die Verwendung von SixXS verwendet. 
+Im Rahmen des Projektes wird ein Segement des Netzwerkes der FastForward GmbH per IPv6 mit dem Internet verbunden. Damit Verbindungen zum IPv4-Internet möglich sind, wird ein Tunnel-Broker verwendet. Wir haben uns für die Verwendung von SixXS verwendet. Alternative Tunnel-Broker haben meist nur einen Standort. Beispielsweise IPv6Now in Australien oder 6frei in China. Der ähnlich breitaufgestellte Tunnel-Broker Hurricane Electric scheidet nur deswegen aus, weil SixXS mehr Protokolle unterstützt und damit für unsere Zwecke, die gesamte Kommunikation per IPv6 abzuwickel besser geeignet ist.
 
-Welche Funktionen bietet unser Produkt?
-
-Die Funktionen unseres Produktes umfassen die Abwicklung der Internetkommunikation per IPv6 und IPv4. Die interne Netzwerkkommunikation wird dabei ausschließlich per IPv6 realisiert.
+Die Funktionen unseres Produktes umfassen die Abwicklung der Internetkommunikation per IPv6 und IPv4. Die interne Netzwerkkommunikation wird dabei ausschließlich per IPv6 realisiert. Damit die internen Clients nicht von außen erreichbar sind, werden zwei Subnetze realisiert, die durch die IPv6-Firewall getrennt werden.
 
 \begin{itemize}
 	\item Ausschließlich IPv6-basiertes Netzsegment
@@ -14,4 +12,3 @@ Die Funktionen unseres Produktes umfassen die Abwicklung der Internetkommunikati
 	\item IPv6-Firewall
 \end{itemize}
 
-Damit die internen Clients nicht von außen erreichbar sind, werden zwei Subnetze realisiert, die durch die IPv6-Firewall getrennt werden.
