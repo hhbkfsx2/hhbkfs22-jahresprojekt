@@ -1,33 +1,32 @@
 \section{Globale Testfälle}
 
-Wir unterscheiden vier Kategorien von globalen Testfällen. Die erste Kategorie umfasst die Funktionen des Mail- und Webserver und die zweite die Funktion des lokalen Netzwerkes. In der dritten Kategorie werden alle Tests zusammengefasst, die den Zugriff der Clients auf die Server betreffen. Abschließend wird in der vierten Kategorie getestet, ob das Netzwerksegment aus dem öffentlichen Internet erreichbar ist und ob die Services in der DMZ genutzt werden können.
+Wir unterscheiden vier Kategorien von globalen Testfällen zur Bestimmung der Funktionalität. Die erste Kategorie umfasst die Funktionen des Mail- und Webserver und die zweite die Funktion des lokalen Netzwerkes. In der dritten Kategorie werden alle Tests zusammengefasst, die den Zugriff der Clients auf die Server betreffen. Abschließend wird in der vierten Kategorie getestet, ob das Netzwerksegment aus dem öffentlichen Internet erreichbar ist und ob die Services in der DMZ genutzt werden können.
 
 \begin{enumerate}
 	\item Mail- und Webserver
 		\begin{itemize}
-			\item 
-			\item 
-			\item 
+			\item[S01] Erreichbarkeit des Mailservers
+			\item[S02] Erreichbarkeit des Webservers
+			\item[S03] Der Webserver kann Mails senden und empfangen
 		\end{itemize}
 	\item Lokales Netzwerk 
 		\begin{itemize}
-			\item 
-			\item 
-			\item 
-		\end{itemize}
+			\item[I01] Kommunikation der Server und Clients per IPv6
+			\item[I02] Trennung von Trusted Zone und DMZ per VLAN  
+			\item[I03] Kommunikation per IPv4 findet nicht statt
+		\end{item[]ize}
 	\item Clients
 		\begin{itemize}
-			\item 
-			\item 
-			\item 
+			\item[C01] Kommunikation der Clients mit IPv4-Server im Internet ist möglich
+			\item[C02] Clients können über den Mailserver Emails senden und empfangen
+			\item[C03] (optional) Clients können sich gegen die Windows Domäne authentifizieren
 		\end{itemize}
 	\item Zugriff aus dem Internet
 		\begin{itemize}
-			\item 
-			\item 
-			\item 
+			\item[E01] Mail- und Webserver sind aus dem Internet erreichbar 
+			\item[E02] Clients sind aus dem Internet nicht erreichbar
+			\item[E03] Firewall öffnet nur tatsächlich genutzte Ports 
 		\end{itemize}
 \end{enumerate}
-
 
 
