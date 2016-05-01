@@ -17,6 +17,10 @@ TODO:
 	* Anlegen der Kapitelstruktur
 	* Netzwerkkonzept
 	* Projektstrukturplan
+	* Dokumentation der Installation sowohl von ... mit Bildern
+		- KVM-Host
+		- VM
+		- Win2012R2
 
 ==============================================================================
 DONE:
