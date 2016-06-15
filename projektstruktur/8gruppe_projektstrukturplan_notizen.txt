@@ -1,0 +1,47 @@
+AP001 & Zusammentragen und Überprüfen der Hardware & 1h\\
+AP002 & Router: Basis-Konfiguration (IPv6) & 4h\\
+AP003 & Switch: Basis-Konfiguration (IPv6) & 4h\\
+AP004 & Router: Routing Intern & 4h\\
+AP005 & Skript: Netzwerk Tests & 4h\\
+AP006 & Test: Netzverfügbarkeit \& Konnektivität & 1h\\
+AP007 & Test: Netzwerk Reinheit (kein IPv4 / Wireshark) & 1h\\
+AP008 & Router: SIXXS-Tunnel & 4h\\
+AP009 & Test: Tunnel Stabilität/Konnektivität/Goodwidth & 1h\\
+AP010 & Router IPv6 Firewall & 4h\\
+AP011 & Backup: Router \& Switch Konfiguration & 1h\\
+AP012 & Installation: Hypervisor & 2h\\
+AP013 & Konfiguration Hypervisor & 4h\\
+AP014 & Installation: Linux Server mit LAMP & 5h\\
+AP015 & Konfiguation: Web-/ Mailserver & 6h\\
+AP016 & Test: Aufruf Websites intern & 1h\\
+AP017 & Test: Mailversand intern & 1h\\
+AP018 & Test: Mailversand nach Draußen & 1h\\
+AP019 & Test: Webserver Zugriff von Außen & 1h\\
+AP020 & Test: Firewall & 1h\\
+AP021 & Installation: Windows Domain Controller & 2h\\
+AP022 & Konfiguration: Windows Domain Controller & 6h\\
+AP023 & Test: Domänen Verfügbarkeit & 1h\\
+AP024 & Test: Authentizierung am AD & 1h\\
+AP102 & Dokumentation: Konfiguration Router & 3h\\
+AP103 & Dokumentation: Konfiguration Switch & 3h\\
+AP104 & Dokumentation: Skripte & 3h\\
+AP105 & Dokumentation: Test Netzwerk Intern & 2h\\
+AP106 & Dokumentation: Test Netzwerk Extern & 2h\\
+AP107 & Dokumentation: Hypervisor & 3h\\
+AP108 & Dokumentation: Linux Server LAMP & 3h\\
+AP109 & Dokumentation: Linux Server Mail & 3h\\
+AP110 & Dokumentation: Test Linux Server & 2h\\
+AP111 & Dokumentation: Test Firewall & 2h\\
+AP112 & Dokumentation: Domaincontroller & 3h\\
+AP113 & Dokumentation: Test Domaincontroller & 2h\\
+
+
+
+Freitag bis Freitag
+	1	6h
+	2	6h
+	3	6h
+	4	6h
+	5	6h
+	----------
+		30h x 3 = 90 manly hours
