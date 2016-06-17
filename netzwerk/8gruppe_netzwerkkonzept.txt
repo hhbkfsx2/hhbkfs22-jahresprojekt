@@ -1,9 +1,0 @@
-			LAN			VLAN	DMZ			VLAN
-Router			2001:4dd0:fc0b:f4::1/64	20	2001:4dd0:fc0b:a:1/64	10
-Switch			2001:4dd0:fc0b:f4::2/64	20	2001:4dd0:fc0b:a:2/64	10
-Client01		2001:4dd0:fc0b:f4::3/64	20		
-Client02		2001:4dd0:fc0b:f4::4/64	20		
-Domain Controller	2001:4dd0:fc0b:f4::5/64	20		
-Mailserver		2001:4dd0:fc0b:a:3/64	10
-Webserver		2001:4dd0:fc0b:a:4/64	10
-
