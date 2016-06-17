@@ -1,0 +1,4 @@
+enable secret: beetlejuce
+enable pw (legacy): athaeXa3xeujae6w
+
+login: beetlejuce
