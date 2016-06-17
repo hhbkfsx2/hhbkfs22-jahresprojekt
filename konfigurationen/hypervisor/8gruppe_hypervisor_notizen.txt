@@ -1,4 +1,4 @@
-Hypervisor: Instalaltion / Konfiguration
+Hypervisor: Installation / Konfiguration
 ==============================================================================
 
 
@@ -26,12 +26,12 @@ Installationsdialog
 	Password Keins12345+#
 	No encrypted home
 	Partitionierung
-		Guided Use entire Disk SSD
+		Guided Use entire Disk sdb
 			44GB root
 			16GB swap
 	Choose Software
 		Default
-	Grub MBR auf die SSD
+	Grub MBR sdb
 
 ==============================================================================
 Software
@@ -39,10 +39,10 @@ Software
 apt-get purge
 	mdadm
 
-
 apt-get install
 	openssh-{server,client}
 	qemu-kvm libvirt-bin
+	virtinst
 	
 ==============================================================================
 Konfiguration
@@ -53,9 +53,22 @@ User		kilian
 		mirko
 		tom
 
+Locale		sed -i "/#.*_/d" /etc/locale.gen
+		echo "de_DE.UTF-8 UTF-8" >> /etc/locale.gen
+		locale-gen
+
 Da es sich um eine Notlösung handelt und das eigentliche Anliegen darin
 besteht, die Internetverbindung über IPv6 zu realisieren, wird auf weitere
 Anpassungen der Server verzichtet.
+
+==============================================================================
+Libvirt
+
+/etc/libvirt/qemu.conf
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+user = "root"
+group = "root"
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ==============================================================================
 LVM
@@ -65,13 +78,16 @@ LVM
 		mkpart primary 1M 100%
 		set 1 lvm on
 	pvcreate /dev/sda1
-	vgcreate vg0 /dev/sda
+	vgcreate vg0 /dev/sda1
 
 # Storage Pool
 /etc/libvirt/qemu/storage/vg0.xml
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 <pool type='logical'>
-        <name>vgX</name>
+        <name>vg0</name>
+	<source>
+		<device path='/dev/sda1'/>
+	</source>
         <target>
                 <path>/dev/vg0</path>
         </target>
@@ -81,4 +97,3 @@ LVM
 	virsh pool-define /etc/libvirt/qemu/storage/vg0.xml
 	virsh pool-start vg0
 	virsh pool-autostart vg0
-

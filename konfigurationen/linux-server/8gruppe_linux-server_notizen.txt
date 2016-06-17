@@ -1,0 +1,72 @@
+Linux-Server
+==============================================================================
+virt-install --connect qemu:///system --hvm --name webserver --ram 4096 --vcpus 1 --disk pool=vg0,size=100,bus=virtio,cache=none,sparse=false --cdrom=/root/isos/ubuntu-16.04-server-amd64.iso --os-type linux --network bridge=virbr0,model=virtio --graphics vnc,port=10123,listen=0.0.0.0,keymap=de,password=Keins12345+# --boot hd
+
+==============================================================================
+'Hardware'
+	CPU	1
+	RAM	4GB
+	HDD	100GB
+
+==============================================================================
+Installation
+
+Installation auf Englisch
+Installationsdialog
+        Language English
+        Territory German
+        Default locale en_US.UTF-8
+	Keyboard German
+
+	Hostname webserver
+	Username user
+	Password Keins12345+#
+	Paritionierung
+		Guided Use entire Disk vda
+			96GB root
+			4GB swap
+	Choose Software
+		Default
+		SSH-Server
+	Grub MBR vda
+
+==============================================================================
+Nach der Installation muss sichergestellt werden, dass in der Definition der
+VM als Boot-Medium 'hd' statt 'cdrom' steht, da der Server ansonsten nicht
+bootet. Darüber hinaus sollte auch das CDROM-Laufwerk entfernt werden.
+
+	virsh edit webserver
+
+==============================================================================
+Software
+
+purge mdadm
+
+	apache2
+	mysql
+	php
+	postfix
+
+==============================================================================
+Konfiguration
+
+------------------------------------------------------------------------------
+Netzwerk
+
+/etc/network/interfaces
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+auto ens3
+iface ens3 inet static
+	address		192.168.122.101
+	netmask		255.255.255.0
+	network		192.168.122.0
+	broadcast	192.168.122.255
+	gateway		192.168.122.1
+	dns-nameservers	192.168.122.1	
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+------------------------------------------------------------------------------
+Locale          sed -i "/#.*_/d" /etc/locale.gen
+                echo "de_DE.UTF-8 UTF-8" >> /etc/locale.gen
+                locale-gen
+	
