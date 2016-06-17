@@ -80,3 +80,5 @@ LVM
 
 	virsh pool-define /etc/libvirt/qemu/storage/vg0.xml
 	virsh pool-start vg0
+	virsh pool-autostart vg0
+
