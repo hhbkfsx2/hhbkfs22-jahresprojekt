@@ -97,3 +97,24 @@ LVM
 	virsh pool-define /etc/libvirt/qemu/storage/vg0.xml
 	virsh pool-start vg0
 	virsh pool-autostart vg0
+
+==============================================================================
+Network: Bridge
+
+/etc/network/interfaces
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+auto lo
+iface lo inet loopback
+
+auto enp4s2
+iface enp4s2 inet manual
+        dns-nameservers 192.168.0.1
+
+auto br0
+iface br0 inet static
+        bridge_ports    enp4s2
+        address         192.168.0.13
+        netmask         255.255.255.0
+        gateway         192.168.0.1
+        broadcast       192.168.0.255
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
