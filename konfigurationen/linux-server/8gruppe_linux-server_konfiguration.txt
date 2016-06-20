@@ -1,0 +1,26 @@
+==============================================================================
+Mailserver
+
+------------------------------------------------------------------------------
+Postfix
+
+Während des Installationsdialoges wurde 'Internet with Smarthost' gewählt.
+Der SMTP-Server blieb vorerst unkonfiguriert. Als Domain wurd
+'fastforward.hhbk.de' angegeben.
+
+------------------------------------------------------------------------------
+Dovecot
+
+
+==============================================================================
+Apache
+
+Die 12KB große Datei 'index.html' wurde für den Testbetrieb durch eine
+kleinere ersetzt, die lediglich 'Hello World!' ausgibt.
+
+/var/www/html/index.html
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Hello World!
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+==============================================================================
