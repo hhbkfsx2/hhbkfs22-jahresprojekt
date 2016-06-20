@@ -1,6 +1,8 @@
+r1#enable secret beetlejuce
+r1#enable password athaeXa3xeujae6w
 r1(config)#ipv6 unicast-routing
-r1(config)#ip subnet-zero
-r1(config)#ip domain lookup
+#r1(config)#ip subnet-zero
+#r1(config)#ip domain lookup
 r1(config)#ip name-server 8.8.8.8
 
 #Vlan Deklaration
@@ -13,7 +15,7 @@ r1(vlan)#exit
 #Subinterface vlan 10
 r1(config)#interface FastEthernet0/1.10
 r1(config-subif)#description subinterface vlan 10
-r1(config-subif)#encapsulation dot1Q 10 native
+r1(config-subif)#encapsulation dot1Q 10
 r1(config-subif)#ipv6 address 2001:4dd0:fc0b:a::1/64
 r1(config-subif)#no shutdown
 r1(config-subif)#exit
@@ -28,18 +30,30 @@ r1(config-subif)#exit
 
 #Interface ins Schulnetz
 Router(config)#interface fastethernet 0/0
-Router(config-if)#speed auto
+#Router(config-if)#speed auto
 Router(config-if)#ip address 212.72.180.241 255.255.255.224
 Router(config-if)#ip default-gateway 212.72.180.225
 Router(config-if)#no shutdown
 Router(config-if)#exit
 
+#SSH
+r1(config)#ip domain-name fastforward.hhbk.de
+r1(config)#crypto key generate rsa general-keys modulus 1024
+r1(config)#username admin privilege 15 secret beetlejuce
+r1(config)#line vty 0 4
+r1(config-line)#transport input telnet ssh
+r1(config-line)#login local
+r1(config-line)#end
+
 #Routing
 Router(config)#ip route 0.0.0.0 0.0.0.0 fastethernet 0/0
-Router(config)#ipv6 route 2001:4dd0:fc0b:a::1/64 FastEthernet0/1.10
-Router(config)#ipv6 route 2001:4dd0:fc0b:f4::1/64 FastEthernet0/1.20
+Router(config)#ipv6 route 2001:4dd0:fc0b:a::/64 FastEthernet0/1.10
+Router(config)#ipv6 route 2001:4dd0:fc0b:f4::/64 FastEthernet0/1.20
 
 
+
+
+#debug ip udp
 
 
 
