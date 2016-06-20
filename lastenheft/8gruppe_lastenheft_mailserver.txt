@@ -1,0 +1,2 @@
+Muss nur Emails empfangen können
+Interne IPv6-Kommunikation
