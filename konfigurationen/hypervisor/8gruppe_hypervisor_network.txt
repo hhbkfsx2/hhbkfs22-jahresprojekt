@@ -1,7 +1,39 @@
+
 ==============================================================================
-DNS
 
+==============================================================================
+Network: Bridge
 
+Durch die Definition einer Bridge ist es möglich, die VMs direkt aus dem
+Netzwerk anzusprechen, da die Bridge wie ein Switch funktioniert, der die VMs
+an das lokale Netzwerk anbindet.
+
+/etc/network/interfaces
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+source /etc/network/interfaces.d/*
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+auto enp4s0
+iface enp4s0 inet manual
+        # dns-* options are implemented by the resolvconf package, if installed
+        dns-nameservers 10.247.53.33
+
+auto br0
+iface br0 inet static
+        bridge-ports    enp4s0
+        address         10.212.53.188
+        netmask         255.255.255.0
+        network         10.212.53.0
+        broadcast       10.212.53.255
+        gateway         10.212.53.1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ==============================================================================
 Tunnel
