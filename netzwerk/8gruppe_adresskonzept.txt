@@ -13,5 +13,6 @@ Router			2001:4dd0:fc0b:f4::1/128	20	2001:4dd0:fc0b:a::1/128	10
 Switch			2001:4dd0:fc0b:f4::2/128	20	2001:4dd0:fc0b:a::2/128	10
 Client01		2001:4dd0:fc0b:f4::3/128	20		
 Client02		2001:4dd0:fc0b:f4::4/128	20		
-Domain Controller	2001:4dd0:fc0b:f4::5/128	20		
-Mailserver							2001:4dd0:fc0b:a::3/128	10
+Hypervisor							2001:4dd0:fc0b:a::3/128	19		
+Mailserver							2001:4dd0:fc0b:a::4/128	10
+Domain Controler	2001:4dd0:fc0b:f4::6/128	20
