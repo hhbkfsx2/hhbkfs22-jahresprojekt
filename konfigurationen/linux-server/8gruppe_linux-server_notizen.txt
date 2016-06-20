@@ -44,6 +44,8 @@ Deinstalliert:  mdadm
 
 Installiert:	apache2
 		postfix
+		dovecot
+		bsd-mailx
 
 ==============================================================================
 Konfiguration

@@ -1,6 +1,17 @@
 ==============================================================================
 Mailserver
 
+------------------------------------------------------------------------------
+Postfix
+
+Während des Installationsdialoges wurde 'Internet with Smarthost' gewählt.
+Der SMTP-Server blieb vorerst unkonfiguriert. Als Domain wurd
+'fastforward.hhbk.de' angegeben.
+
+------------------------------------------------------------------------------
+Dovecot
+
+
 ==============================================================================
 Apache
 
