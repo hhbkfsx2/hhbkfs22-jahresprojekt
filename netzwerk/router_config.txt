@@ -1,4 +1,4 @@
-Current configuration : 1454 bytes
+Current configuration : 1847 bytes
 !
 version 12.4
 service timestamps debug datetime msec
@@ -29,16 +29,10 @@ no ip cef
 !
 !
 !
+ip domain name fastforward.hhbk.de
 ip name-server 8.8.8.8
 !
 ipv6 unicast-routing
-!
-!
-!
-!
-!
-!
-!
 !
 !
 !
@@ -47,10 +41,28 @@ ipv6 unicast-routing
 !
 !
 !
+!
+!
+!
+!
+!
+!
+username admin privilege 15 secret 5 $1$2OK3$Vk3gHcrGlMbpBTWT8p00l0
+!
 ! 
 !
 !
 !
+!
+interface Tunnel61
+ description 6in4 tunnel to SixXS
+ no ip address
+ ip tcp adjust-mss 1420
+ ipv6 address 2001:4DD0:FF00:147F::2/64
+ ipv6 enable
+ tunnel source FastEthernet0/0
+ tunnel destination 78.35.24.124
+ tunnel mode ipv6ip
 !
 interface FastEthernet0/0
  ip address 212.72.180.241 255.255.255.224
@@ -89,7 +101,7 @@ interface Serial0/2/1
  no ip route-cache
  shutdown
  clock rate 125000
-!         
+!
 ip default-gateway 212.72.180.225
 ip classless
 !
@@ -97,6 +109,7 @@ ip classless
 ip http server
 no ip http secure-server
 !
+ipv6 route ::/0 Tunnel61
 !
 !
 !
@@ -104,7 +117,7 @@ no ip http secure-server
 control-plane
 !
 !
-!
+!         
 !
 !
 !
@@ -115,7 +128,8 @@ line con 0
 line aux 0
 line vty 0 4
  password beetlejuce
- login
+ login local
+ transport input telnet ssh
 !
 end
 

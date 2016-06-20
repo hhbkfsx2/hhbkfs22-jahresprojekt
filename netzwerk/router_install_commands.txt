@@ -52,7 +52,30 @@ Router(config)#ipv6 route 2001:4dd0:fc0b:f4::/64 FastEthernet0/1.20
 
 
 
+interface Tunnel61
+ description 6in4 tunnel to SixXS
+ no ip address
+ ip tcp adjust-mss 1420
+ ipv6 address 2001:4dd0:ff00:147f::2/64
+ ipv6 enable
+ tunnel source fastethernet 0/0
+ tunnel destination 78.35.24.124
+ tunnel mode ipv6ip
+ipv6 route ::/0 Tunnel61
 
+
+
+show ip interface tunnel61
+show ipv6 interface tunnel61
+
+
+
+
+
+
+
+
+2001:4860:4860::8888
 #debug ip udp
 
 
