@@ -1,8 +1,9 @@
-r1#enable secret beetlejuce
-r1#enable password athaeXa3xeujae6w
+#Basics
+r1(config)#enable secret password123
+r1(config)#enable password password123
 r1(config)#ipv6 unicast-routing
-#r1(config)#ip subnet-zero
-#r1(config)#ip domain lookup
+# r1(config)#ip subnet-zero
+# r1(config)#ip domain lookup
 r1(config)#ip name-server 8.8.8.8
 
 #Vlan Deklaration
@@ -29,54 +30,46 @@ r1(config-subif)#no shutdown
 r1(config-subif)#exit
 
 #Interface ins Schulnetz
-Router(config)#interface fastethernet 0/0
-#Router(config-if)#speed auto
-Router(config-if)#ip address 212.72.180.241 255.255.255.224
-Router(config-if)#ip default-gateway 212.72.180.225
-Router(config-if)#no shutdown
-Router(config-if)#exit
+r1(config)#interface fastethernet 0/0
+# r1(config-if)#speed auto
+r1(config-if)#ip address 212.72.180.241 255.255.255.224
+r1(config-if)#ip default-gateway 212.72.180.225
+r1(config-if)#no shutdown
+r1(config-if)#exit
 
 #SSH
 r1(config)#ip domain-name fastforward.hhbk.de
 r1(config)#crypto key generate rsa general-keys modulus 1024
-r1(config)#username admin privilege 15 secret beetlejuce
+r1(config)#username admin privilege 15 secret password123
 r1(config)#line vty 0 4
 r1(config-line)#transport input telnet ssh
 r1(config-line)#login local
 r1(config-line)#end
 
 #Routing
-Router(config)#ip route 0.0.0.0 0.0.0.0 fastethernet 0/0
-Router(config)#ipv6 route 2001:4dd0:fc0b:a::/64 FastEthernet0/1.10
-Router(config)#ipv6 route 2001:4dd0:fc0b:f4::/64 FastEthernet0/1.20
+r1(config)#ip route 0.0.0.0 0.0.0.0 fastethernet 0/0
+r1(config)#ipv6 route 2001:4dd0:fc0b:a::/64 FastEthernet0/1.10
+r1(config)#ipv6 route 2001:4dd0:fc0b:f4::/64 FastEthernet0/1.20
 
 
 
-interface Tunnel61
- description 6in4 tunnel to SixXS
- no ip address
- ip tcp adjust-mss 1420
- ipv6 address 2001:4dd0:ff00:147f::2/64
- ipv6 enable
- tunnel source fastethernet 0/0
- tunnel destination 78.35.24.124
- tunnel mode ipv6ip
-ipv6 route ::/0 Tunnel61
+r1(config)#interface Tunnel61
+r1(config-if)#description 6in4 tunnel to SixXS
+r1(config-if)#no ip address
+r1(config-if)#ip tcp adjust-mss 1420
+r1(config-if)#ipv6 address 2001:4dd0:ff00:147f::2/64
+r1(config-if)#ipv6 enable
+r1(config-if)#tunnel source fastethernet 0/0
+r1(config-if)#tunnel destination 78.35.24.124
+r1(config-if)#tunnel mode ipv6ip
+r1(config-if)#exit
+r1(config)#ipv6 route ::/0 Tunnel61
 
 
+#Tunnel Prüfen
+r1#show ip interface tunnel61
+r1#show ipv6 interface tunnel61
 
-show ip interface tunnel61
-show ipv6 interface tunnel61
-
-
-
-
-
-
-
-
-2001:4860:4860::8888
-#debug ip udp
 
 
 
