@@ -75,8 +75,8 @@ r1#show ipv6 interface tunnel61
 r1(config)#ipv6 access-list from_wan_in
 r1(config-ipv6-acl)#permit icmp any any
 r1(config-ipv6-acl)#permit tcp any any eq 22
-r1(config-ipv6-acl)#permit tcp any any eq www
-r1(config-ipv6-acl)#permit tcp any any eq 443
+r1(config-ipv6-acl)#permit tcp any any eq www reflect dmz-wan-reflexive timeout 5
+r1(config-ipv6-acl)#permit tcp any any eq 443 reflect dmz-wan-reflexive timeout 5
 r1(config-ipv6-acl)#permit tcp any any eq smtp
 r1(config-ipv6-acl)#evaluate wan-dmz-reflexive
 r1(config-ipv6-acl)#evaluate wan-lan-reflexive
@@ -92,6 +92,7 @@ r1(config-ipv6-acl)#permit tcp any any eq 22 reflect wan-dmz-reflexive timeout 5
 r1(config-ipv6-acl)#permit tcp any any eq www reflect wan-dmz-reflexive timeout 5
 r1(config-ipv6-acl)#permit tcp any any eq 443 reflect wan-dmz-reflexive timeout 5
 r1(config-ipv6-acl)#permit tcp any any eq smtp reflect wan-dmz-reflexive timeout 5
+r1(config-ipv6-acl)#evaluate dmz-wan-reflexive
 
 r1(config)#interface FastEthernet0/1.10
 r1(config-if)#ipv6 traffic-filter dmz_in in
