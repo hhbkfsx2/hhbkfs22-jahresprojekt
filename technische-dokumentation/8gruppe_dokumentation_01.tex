@@ -31,7 +31,7 @@
 
 Folgende DNS-Einstellungen wurden vorgenommen, um den Linux-Server aus dem Internet über die Domain {\texttt fastforward.hhbk.de} erreichbar zu machen.
 \begin{lstlisting}[numbers=none]
-fastforward.hhbk.de.		A		212.72.180.241
+fastforward.hhbk.de.		A			212.72.180.241
 fastforward.hhbk.de.		AAAA 	2001:4dd0:fc0b:a::4
 fastforward.hhbk.de.		MX		fastforward.hhbk.de
 \end{lstlisting}
@@ -43,10 +43,11 @@ fastforward.hhbk.de.		MX		fastforward.hhbk.de
 \begin{tabular}{|l|l|l|}
 \hline
 					& LAN: VLAN 20					& DMZ: VLAN 10 \\
+\hline
 Router				& 2001:4dd0:fc0b:f4::1/128		& 2001:4dd0:fc0b:a::1/128 \\
 Switch				& 2001:4dd0:fc0b:f4::2/128		& 2001:4dd0:fc0b:a::2/128 \\
 Hypervisor			& 2001:4dd0:fc0b:f4::3/128		& 2001:4dd0:fc0b:a::3/128 \\	
-Linux-Server											& 2001:4dd0:fc0b:a::4/128 \\
+Linux-Server			&								& 2001:4dd0:fc0b:a::4/128 \\
 Domain Controler 	& 2001:4dd0:fc0b:f4::5/128		& \\
 Client01				& 2001:4dd0:fc0b:f4::a/128		& \\
 Client02				& 2001:4dd0:fc0b:f4::b/128		& \\
@@ -56,8 +57,8 @@ Client03				& 2001:4dd0:fc0b:f4::c/128		& \\
 
 \subsection{Netzwerkplan}
 
-\begin{wrapfigure}{c}{0.5\textwidth}
+%\begin{wrapfigure}{c}{0.5\textwidth}
 \includegraphics[scale=0.5]{8gruppe_dokumentation_pictures/02_JahresProjekt_Netzwerkplan.png}
 \label{realisiertes_netzwerk}
-\caption{Realisiertes Netzwerk}
-\end{wrapfigure}
+%\caption{Realisiertes Netzwerk}
+%\end{wrapfigure}

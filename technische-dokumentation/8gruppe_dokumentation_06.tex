@@ -2,7 +2,7 @@
 
 \subsection{Installation}
 
-Die virtuelle Maschine wurde auf dem Hypervisor mithilfe von {\sc virtinst} und folgendem Befehl initialisiert.
+Die virtuelle Maschine wurde auf dem Hypervisor mithilfe von {\texttt virtinst} und folgendem Befehl initialisiert.
 
 \begin{lstlisting}[numbers=none]
 > virt-install --hvm --connect qemu:///system --name win2012 --ram 8192 --vcpus 2 \
@@ -15,6 +15,6 @@ Die virtuelle Maschine wurde auf dem Hypervisor mithilfe von {\sc virtinst} und 
   --boot cdrom,hd,menu=on
 \end{lstlisting}
 
-Anschließend wurde sich per VNC verbunden, um den Domain Controler per graphischem Installationsdialog zu installieren. Dabei wurde eine Installation mit graphischer Oberfläche gewählt, da dies der üblichen Administrationsweise unter Windows entspricht. Während der Installation müssen über die zusätzlich eingebundene CD \ql virtio-win\qr\ die Treiber für das Netzwerk ({\sc NetKVM > WIN2012R2 > amd64}) und die Festplatte ({\sc viostor > WIN2012	R2 > amd64})installiert werden. Bei der Partitionierung wurde die gesamte Festplatte gewählt und abschließend dem Administrator das Passwort \ql password123\qr\ gegeben.
+Anschließend wurde sich per VNC verbunden, um den Domain Controler per graphischem Installationsdialog zu installieren. Dabei wurde eine Installation mit graphischer Oberfläche gewählt, da dies der üblichen Administrationsweise unter Windows entspricht. Während der Installation müssen über die zusätzlich eingebundene CD \ql virtio-win\qr\ die Treiber für das Netzwerk ({\texttt NetKVM > WIN2012R2 > amd64}) und die Festplatte ({\texttt viostor > WIN2012	R2 > amd64})installiert werden. Bei der Partitionierung wurde die gesamte Festplatte gewählt und abschließend dem Administrator das Passwort \ql password123\qr\ gegeben.
 
 \subsection{Konfiguration}

@@ -31,7 +31,7 @@
 
 Folgende DNS-Einstellungen wurden vorgenommen, um den Linux-Server aus dem Internet über die Domain {\texttt fastforward.hhbk.de} erreichbar zu machen.
 \begin{lstlisting}[numbers=none]
-fastforward.hhbk.de.		A		212.72.180.241
+fastforward.hhbk.de.		A			212.72.180.241
 fastforward.hhbk.de.		AAAA 	2001:4dd0:fc0b:a::4
 fastforward.hhbk.de.		MX		fastforward.hhbk.de
 \end{lstlisting}
@@ -43,10 +43,11 @@ fastforward.hhbk.de.		MX		fastforward.hhbk.de
 \begin{tabular}{|l|l|l|}
 \hline
 					& LAN: VLAN 20					& DMZ: VLAN 10 \\
+\hline
 Router				& 2001:4dd0:fc0b:f4::1/128		& 2001:4dd0:fc0b:a::1/128 \\
 Switch				& 2001:4dd0:fc0b:f4::2/128		& 2001:4dd0:fc0b:a::2/128 \\
 Hypervisor			& 2001:4dd0:fc0b:f4::3/128		& 2001:4dd0:fc0b:a::3/128 \\	
-Linux-Server											& 2001:4dd0:fc0b:a::4/128 \\
+Linux-Server			&								& 2001:4dd0:fc0b:a::4/128 \\
 Domain Controler 	& 2001:4dd0:fc0b:f4::5/128		& \\
 Client01				& 2001:4dd0:fc0b:f4::a/128		& \\
 Client02				& 2001:4dd0:fc0b:f4::b/128		& \\
@@ -56,11 +57,12 @@ Client03				& 2001:4dd0:fc0b:f4::c/128		& \\
 
 \subsection{Netzwerkplan}
 
-\begin{wrapfigure}{c}{0.5\textwidth}
+%\begin{wrapfigure}{c}{0.5\textwidth}
 \includegraphics[scale=0.5]{8gruppe_dokumentation_pictures/02_JahresProjekt_Netzwerkplan.png}
 \label{realisiertes_netzwerk}
-\caption{Realisiertes Netzwerk}
-\end{wrapfigure}
+%\caption{Realisiertes Netzwerk}
+%\end{wrapfigure}
+\newpage
 \section{Router: Konfiguration}
 
 Abweichend von der einleitenden Anmerkung wurden folgende Befehle unter Ciscos iOS verwendet, um die Konfiguration des Routers vorzunehmen.
@@ -178,7 +180,8 @@ r1(config)#interface FastEthernet0/0
 r1(config-if)#ip access-group from_wan_in in
 
 r1(config)#do show ipv6 access-list
-\end{lstlisting}\section{Switch: Konfiguration}
+\end{lstlisting}\newpage
+\section{Switch: Konfiguration}
 
 Abweichend von der einleitenden Anmerkung wurden folgende Befehle unter Ciscos iOS verwendet, um die Konfiguration des Switches vorzunehmen.
 
@@ -246,21 +249,21 @@ Die Installation erfolgt per graphischen Installationsdialog. Englisch wurde gew
 	\item[Grub MBR] sdb
 \end{itemize}
 
-Nach der Installation wurde darüberhinaus folgende Software installiert: {\sc qemu-kvm libvirt-bin virtinst}.
+Nach der Installation wurde darüberhinaus folgende Software installiert: {\texttt qemu-kvm libvirt-bin virtinst}.
 
 \subsection{Konfiguration}
 
 \subsubsection{libvirt}
 
-Zunächst muss der QEMU-Treiber von {\sc libvirt} konfiguriert werden, damit dieser weiß, mit welchem User QEMU ausgeführt wird. 
+Zunächst muss der QEMU-Treiber von {\texttt libvirt} konfiguriert werden, damit dieser weiß, mit welchem User QEMU ausgeführt wird. 
 
-Konfigurationsdatei: {\sc /etc/libvirt/qemu.conf}
+Konfigurationsdatei: {\texttt /etc/libvirt/qemu.conf}
 \begin{lstlisting}
 user = "root"
 group = "root"
 \end{lstlisting}
 
-Anschließend wird die HDD mit 500GB formatiert und die Volume Group {\sc vg0} definiert.
+Anschließend wird die HDD mit 500GB formatiert und die Volume Group {\texttt vg0} definiert.
 
 \begin{lstlisting}[numbers=none]
 > parted /dev/sda
@@ -271,9 +274,9 @@ Anschließend wird die HDD mit 500GB formatiert und die Volume Group {\sc vg0} d
 > vgcreate vg0 /dev/sda1
 \end{lstlisting} 
 
-Die Volume Group {\sc vg0} wird verwendet, um den Pool {\sc vg0} einzurichten. Die folgende Konfiguration muss erstellt werden, um anschließend mit den aufgeführten Befehlen den Pool zu aktivieren.       
+Die Volume Group {\texttt vg0} wird verwendet, um den Pool {\texttt vg0} einzurichten. Die folgende Konfiguration muss erstellt werden, um anschließend mit den aufgeführten Befehlen den Pool zu aktivieren.       
 
-Konfigurationsdatei: {\sc /etc/libvirt/qemu/storage/vg0.xml}
+Konfigurationsdatei: {\texttt /etc/libvirt/qemu/storage/vg0.xml}
 \begin{lstlisting}
 <pool type='logical'>
         <name>vg0</name>
@@ -293,9 +296,9 @@ Konfigurationsdatei: {\sc /etc/libvirt/qemu/storage/vg0.xml}
 
 \subsubsection{Netzwerk}
 
-Der Hypervisor wurde mit zwei Interfaces an den Switch angebunden. Das Interface {\sc enp4s0} wurde an einen Port mit VLAN 10 angeschlossen und {\sc enp2s0} an einen Port mit VLAN 20. Dadurch ist es später einfacher, die virtuellen Server einem VLAN zuzuordnen (s. Kapitel \ql Linux-Server\qr). Für DNS wurde ein Server von Google ausgewählt.
+Der Hypervisor wurde mit zwei Interfaces an den Switch angebunden. Das Interface {\texttt enp4s0} wurde an einen Port mit VLAN 10 angeschlossen und {\texttt enp2s0} an einen Port mit VLAN 20. Dadurch ist es später einfacher, die virtuellen Server einem VLAN zuzuordnen (s. Kapitel \ql Linux-Server\qr). Für DNS wurde ein Server von Google ausgewählt.
 
-Konfigurationsdatei: {\sc /etc/network/interfaces}
+Konfigurationsdatei: {\texttt /etc/network/interfaces}
 \begin{lstlisting}
 source /etc/network/interfaces.d/*
 
@@ -332,7 +335,7 @@ iface br1 inet6 static
 
 \subsection{Installation}
 
-Die virtuelle Maschine wurde auf dem Hypervisor mithilfe von {\sc virtinst} und folgendem Befehl initialisiert.
+Die virtuelle Maschine wurde auf dem Hypervisor mithilfe von {\texttt virtinst} und folgendem Befehl initialisiert.
 
 \begin{lstlisting}[numbers=none]
 > virt-install --connect qemu:///system --hvm --name webserver --ram 4096 --vcpus 1 \
@@ -357,13 +360,13 @@ Die virtuelle Maschine wurde auf dem Hypervisor mithilfe von {\sc virtinst} und 
 	\item[Grub MBR] vda
 \end{itemize}
 
-Nach der Installation wurde darüberhinaus folgende Software installiert: {\sc apache2 postfix}.
+Nach der Installation wurde darüberhinaus folgende Software installiert: {\texttt apache2 postfix}.
 
 \subsection{Konfiguration}
 
 Nach der Installation von Apache wurde die Defaultwebseite durch eine ersetzt, die \ql Hello World!\qr\ ausliefert.
 
-Konfigurationsdatei: {\sc /var/www/html/index.html}
+Konfigurationsdatei: {\texttt /var/www/html/index.html}
 \begin{lstlisting}
 Hello World!
 \end{lstlisting}
@@ -372,7 +375,7 @@ Während des Installationsdialoges von Postfix wurde \ql Internet with Smarthost
 
 \subsubsection{Netzwerk}
 
-Konfigurationsdatei: {\sc /etc/network/interfaces}
+Konfigurationsdatei: {\texttt /etc/network/interfaces}
 \begin{lstlisting}
 source /etc/network/interfaces.d/*
 
@@ -395,7 +398,7 @@ iface ens3 inet6 static
 
 \subsection{Installation}
 
-Die virtuelle Maschine wurde auf dem Hypervisor mithilfe von {\sc virtinst} und folgendem Befehl initialisiert.
+Die virtuelle Maschine wurde auf dem Hypervisor mithilfe von {\texttt virtinst} und folgendem Befehl initialisiert.
 
 \begin{lstlisting}[numbers=none]
 > virt-install --hvm --connect qemu:///system --name win2012 --ram 8192 --vcpus 2 \
@@ -408,7 +411,7 @@ Die virtuelle Maschine wurde auf dem Hypervisor mithilfe von {\sc virtinst} und 
   --boot cdrom,hd,menu=on
 \end{lstlisting}
 
-Anschließend wurde sich per VNC verbunden, um den Domain Controler per graphischem Installationsdialog zu installieren. Dabei wurde eine Installation mit graphischer Oberfläche gewählt, da dies der üblichen Administrationsweise unter Windows entspricht. Während der Installation müssen über die zusätzlich eingebundene CD \ql virtio-win\qr\ die Treiber für das Netzwerk ({\sc NetKVM > WIN2012R2 > amd64}) und die Festplatte ({\sc viostor > WIN2012	R2 > amd64})installiert werden. Bei der Partitionierung wurde die gesamte Festplatte gewählt und abschließend dem Administrator das Passwort \ql password123\qr\ gegeben.
+Anschließend wurde sich per VNC verbunden, um den Domain Controler per graphischem Installationsdialog zu installieren. Dabei wurde eine Installation mit graphischer Oberfläche gewählt, da dies der üblichen Administrationsweise unter Windows entspricht. Während der Installation müssen über die zusätzlich eingebundene CD \ql virtio-win\qr\ die Treiber für das Netzwerk ({\texttt NetKVM > WIN2012R2 > amd64}) und die Festplatte ({\texttt viostor > WIN2012	R2 > amd64})installiert werden. Bei der Partitionierung wurde die gesamte Festplatte gewählt und abschließend dem Administrator das Passwort \ql password123\qr\ gegeben.
 
 \subsection{Konfiguration}\section{Windows Client}
 
@@ -419,7 +422,7 @@ Anschließend wurde sich per VNC verbunden, um den Domain Controler per graphisc
 
 Mit dem folgenen Skript wurde die allgemeine Erreichbarkeit der Server aus dem LAN getestet.
 
-Shell-Skript: {\sc test-ping.sh}
+Shell-Skript: {\texttt test-ping.sh}
 \begin{lstlisting}
 #!/bin/bash
 
@@ -434,7 +437,7 @@ KVM2="2001:4dd0:fc0b:f4::3"
 SRV="2001:4dd0:fc0b:a::4"
 DC="2001:4dd0:fc0b:f4::5"
 
-LOG="test-ping_$(date +%Y%d%m).log"
+LOG="test-ping\_$(date +%Y%d%m).log"
 
 IP="${RIP1} ${RIP2} ${SIP1} ${SIP2} ${KVM1} ${KVM2} ${SRV} ${DC}"
 
@@ -451,7 +454,7 @@ done
 echo -e "\n" >> ${LOG}
 \end{lstlisting}
 
-Log-Datei: {\sc test-ping_20160622.log}
+Log-Datei: {\texttt test-ping\_20160622.log}
 \begin{lstlisting}
 ##########
 Ping-Test 20160622:
@@ -488,7 +491,7 @@ Ping-Test 20160622:
 
 \subsubsection{Erreichbarkeit Webserver}
 
-Die Erreichbarkeit des Webservers wurde von der Kommandozeile per {\sc curl} getestet.
+Die Erreichbarkeit des Webservers wurde von der Kommandozeile per {\texttt curl} getestet.
 
 \begin{lstlisting}[numbers=none]
 > curl -v fastforward.hhbk.de
@@ -517,7 +520,7 @@ Die Erreichbarkeit des Webservers wurde von der Kommandozeile per {\sc curl} get
 
 \subsubsection{Erreichbarkeit Mailserver}
 
-Die Erreichbarkeit des Mailservers wurde von der Kommandozeile per {\sc telnet} getestet.
+Die Erreichbarkeit des Mailservers wurde von der Kommandozeile per {\texttt telnet} getestet.
 
 \begin{lstlisting}[numbers=none]
 > telnet fastforward.hhbk.de 25
@@ -556,7 +559,7 @@ Die Erreichbarkeit des Mailservers wurde von der Kommandozeile per {\sc telnet} 
 
 \subsection{Firewall}
 
-Mit den folgenden Kommandos wurde getestet, ob die Firewall nicht freigeschaltete Ports blockiert. Dazu wurde auf dem Linux-Server mit {\sc netcat} ein Port geöffnet und von extern geprüft, ob sich zu diesem Port verbunden werden kann.
+Mit den folgenden Kommandos wurde getestet, ob die Firewall nicht freigeschaltete Ports blockiert. Dazu wurde auf dem Linux-Server mit {\texttt netcat} ein Port geöffnet und von extern geprüft, ob sich zu diesem Port verbunden werden kann.
 
 \begin{lstlisting}
  #Listening auf dem Linux-Server

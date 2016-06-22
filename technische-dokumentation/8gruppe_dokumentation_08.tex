@@ -4,7 +4,7 @@
 
 Mit dem folgenen Skript wurde die allgemeine Erreichbarkeit der Server aus dem LAN getestet.
 
-Shell-Skript: {\sc test-ping.sh}
+Shell-Skript: {\texttt test-ping.sh}
 \begin{lstlisting}
 #!/bin/bash
 
@@ -19,7 +19,7 @@ KVM2="2001:4dd0:fc0b:f4::3"
 SRV="2001:4dd0:fc0b:a::4"
 DC="2001:4dd0:fc0b:f4::5"
 
-LOG="test-ping_$(date +%Y%d%m).log"
+LOG="test-ping\_$(date +%Y%d%m).log"
 
 IP="${RIP1} ${RIP2} ${SIP1} ${SIP2} ${KVM1} ${KVM2} ${SRV} ${DC}"
 
@@ -36,7 +36,7 @@ done
 echo -e "\n" >> ${LOG}
 \end{lstlisting}
 
-Log-Datei: {\sc test-ping\_20160622.log}
+Log-Datei: {\texttt test-ping\_20160622.log}
 \begin{lstlisting}
 ##########
 Ping-Test 20160622:
@@ -73,7 +73,7 @@ Ping-Test 20160622:
 
 \subsubsection{Erreichbarkeit Webserver}
 
-Die Erreichbarkeit des Webservers wurde von der Kommandozeile per {\sc curl} getestet.
+Die Erreichbarkeit des Webservers wurde von der Kommandozeile per {\texttt curl} getestet.
 
 \begin{lstlisting}[numbers=none]
 > curl -v fastforward.hhbk.de
@@ -102,7 +102,7 @@ Die Erreichbarkeit des Webservers wurde von der Kommandozeile per {\sc curl} get
 
 \subsubsection{Erreichbarkeit Mailserver}
 
-Die Erreichbarkeit des Mailservers wurde von der Kommandozeile per {\sc telnet} getestet.
+Die Erreichbarkeit des Mailservers wurde von der Kommandozeile per {\texttt telnet} getestet.
 
 \begin{lstlisting}[numbers=none]
 > telnet fastforward.hhbk.de 25
@@ -141,7 +141,7 @@ Die Erreichbarkeit des Mailservers wurde von der Kommandozeile per {\sc telnet} 
 
 \subsection{Firewall}
 
-Mit den folgenden Kommandos wurde getestet, ob die Firewall nicht freigeschaltete Ports blockiert. Dazu wurde auf dem Linux-Server mit {\sc netcat} ein Port geöffnet und von extern geprüft, ob sich zu diesem Port verbunden werden kann.
+Mit den folgenden Kommandos wurde getestet, ob die Firewall nicht freigeschaltete Ports blockiert. Dazu wurde auf dem Linux-Server mit {\texttt netcat} ein Port geöffnet und von extern geprüft, ob sich zu diesem Port verbunden werden kann.
 
 \begin{lstlisting}
  #Listening auf dem Linux-Server

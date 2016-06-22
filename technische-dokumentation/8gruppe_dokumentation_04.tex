@@ -3,7 +3,7 @@
 \subsection{Installation}
 
 Die Installation erfolgt per graphischen Installationsdialog. Englisch wurde gewählt, da es die Lingua franca in der IT darstellt. Zusätzlich wurde OpenSSH bei der Installation ausgewählt, um den Server ohne graphische Oberfläche aus der Ferne zu administrieren. Insgesamt wurden während der Installation folgende Einstellungen vorgenommen:
-\begin{itemize}
+\begin{itemize}[leftmargin=+1in]
 	\item[Language] Englisch
 	\item[Territory] Germany
 	\item[Keyboard] german
@@ -16,21 +16,21 @@ Die Installation erfolgt per graphischen Installationsdialog. Englisch wurde gew
 	\item[Grub MBR] sdb
 \end{itemize}
 
-Nach der Installation wurde darüberhinaus folgende Software installiert: {\sc qemu-kvm libvirt-bin virtinst}.
+Nach der Installation wurde darüberhinaus folgende Software installiert: {\texttt qemu-kvm libvirt-bin virtinst}.
 
 \subsection{Konfiguration}
 
 \subsubsection{libvirt}
 
-Zunächst muss der QEMU-Treiber von {\sc libvirt} konfiguriert werden, damit dieser weiß, mit welchem User QEMU ausgeführt wird. 
+Zunächst muss der QEMU-Treiber von {\texttt libvirt} konfiguriert werden, damit dieser weiß, mit welchem User QEMU ausgeführt wird. 
 
-Konfigurationsdatei: {\sc /etc/libvirt/qemu.conf}
+Konfigurationsdatei: {\texttt /etc/libvirt/qemu.conf}
 \begin{lstlisting}
 user = "root"
 group = "root"
 \end{lstlisting}
 
-Anschließend wird die HDD mit 500GB formatiert und die Volume Group {\sc vg0} definiert.
+Anschließend wird die HDD mit 500GB formatiert und die Volume Group {\texttt vg0} definiert.
 
 \begin{lstlisting}[numbers=none]
 > parted /dev/sda
@@ -41,9 +41,9 @@ Anschließend wird die HDD mit 500GB formatiert und die Volume Group {\sc vg0} d
 > vgcreate vg0 /dev/sda1
 \end{lstlisting} 
 
-Die Volume Group {\sc vg0} wird verwendet, um den Pool {\sc vg0} einzurichten. Die folgende Konfiguration muss erstellt werden, um anschließend mit den aufgeführten Befehlen den Pool zu aktivieren.       
+Die Volume Group {\texttt vg0} wird verwendet, um den Pool {\texttt vg0} einzurichten. Die folgende Konfiguration muss erstellt werden, um anschließend mit den aufgeführten Befehlen den Pool zu aktivieren.       
 
-Konfigurationsdatei: {\sc /etc/libvirt/qemu/storage/vg0.xml}
+Konfigurationsdatei: {\texttt /etc/libvirt/qemu/storage/vg0.xml}
 \begin{lstlisting}
 <pool type='logical'>
         <name>vg0</name>
@@ -63,9 +63,9 @@ Konfigurationsdatei: {\sc /etc/libvirt/qemu/storage/vg0.xml}
 
 \subsubsection{Netzwerk}
 
-Der Hypervisor wurde mit zwei Interfaces an den Switch angebunden. Das Interface {\sc enp4s0} wurde an einen Port mit VLAN 10 angeschlossen und {\sc enp2s0} an einen Port mit VLAN 20. Dadurch ist es später einfacher, die virtuellen Server einem VLAN zuzuordnen (s. Kapitel \ql Linux-Server\qr). Für DNS wurde ein Server von Google ausgewählt.
+Der Hypervisor wurde mit zwei Interfaces an den Switch angebunden. Das Interface {\texttt enp4s0} wurde an einen Port mit VLAN 10 angeschlossen und {\texttt enp2s0} an einen Port mit VLAN 20. Dadurch ist es später einfacher, die virtuellen Server einem VLAN zuzuordnen (s. Kapitel \ql Linux-Server\qr). Für DNS wurde ein Server von Google ausgewählt.
 
-Konfigurationsdatei: {\sc /etc/network/interfaces}
+Konfigurationsdatei: {\texttt /etc/network/interfaces}
 \begin{lstlisting}
 source /etc/network/interfaces.d/*
 
