@@ -1,1 +1,101 @@
-\section{Linux-Server: Installation und Konfiguration}
+\section{Hypervisor}
+
+\subsection{Installation}
+
+Die Installation erfolgt per graphischen Installationsdialog. Englisch wurde gewählt, da es die Lingua franca in der IT darstellt. Zusätzlich wurde OpenSSH bei der Installation ausgewählt, um den Server ohne graphische Oberfläche aus der Ferne zu administrieren. Insgesamt wurden während der Installation folgende Einstellungen vorgenommen:
+\begin{itemize}
+	\item[Language] Englisch
+	\item[Territory] Germany
+	\item[Keyboard] german
+	\item[Hostname] hypervisor
+	\item[Domain name] fastforward.hhbk.de
+	\item[Username] user
+	\item[Password] password123
+	\item[Paritioning] Guided: use entire disk
+	\item[Choose software] Default, OpenSSH
+	\item[Grub MBR] sdb
+\end{itemize}
+
+Nach der Installation wurde darüberhinaus folgende Software installiert: {\sc qemu-kvm libvirt-bin virtinst}.
+
+\subsection{Konfiguration}
+
+\subsubsection{libvirt}
+
+Zunächst muss der QEMU-Treiber von {\sc libvirt} konfiguriert werden, damit dieser weiß, mit welchem User QEMU ausgeführt wird. 
+
+Konfigurationsdatei: {\sc /etc/libvirt/qemu.conf}
+\begin{lstlisting}
+user = "root"
+group = "root"
+\end{lstlisting}
+
+Anschließend wird die HDD mit 500GB formatiert und die Volume Group {\sc vg0} definiert.
+
+\begin{lstlisting}[numbers=none]
+> parted /dev/sda
+   mklabel GPT
+   mkpart primary 1M 100%
+   set 1 lvm on
+> pvcreate /dev/sda1
+> vgcreate vg0 /dev/sda1
+\end{lstlisting} 
+
+Die Volume Group {\sc vg0} wird verwendet, um den Pool {\sc vg0} einzurichten. Die folgende Konfiguration muss erstellt werden, um anschließend mit den aufgeführten Befehlen den Pool zu aktivieren.       
+
+Konfigurationsdatei: {\sc /etc/libvirt/qemu/storage/vg0.xml}
+\begin{lstlisting}
+<pool type='logical'>
+        <name>vg0</name>
+        <source>
+                <device path='/dev/sda1'/>
+        </source>
+        <target>
+                <path>/dev/vg0</path>
+        </target>
+</pool>
+\end{lstlisting}
+\begin{lstlisting}[numbers=none]
+> virsh pool-define /etc/libvirt/qemu/storage/vg0.xml
+> virsh pool-start vg0
+> virsh pool-autostart vg0
+\end{lstlisting}
+
+\subsubsection{Netzwerk}
+
+Der Hypervisor wurde mit zwei Interfaces an den Switch angebunden. Das Interface {\sc enp4s0} wurde an einen Port mit VLAN 10 angeschlossen und {\sc enp2s0} an einen Port mit VLAN 20. Dadurch ist es später einfacher, die virtuellen Server einem VLAN zuzuordnen (s. Kapitel \ql Linux-Server\qr). Für DNS wurde ein Server von Google ausgewählt.
+
+Konfigurationsdatei: {\sc /etc/network/interfaces}
+\begin{lstlisting}
+source /etc/network/interfaces.d/*
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+auto enp4s0
+iface enp4s0 inet manual
+        dns-nameservers 2001:4860:4860::8888
+
+auto enp2s0
+iface enp2s0 inet manual
+        dns-nameservers 2001:4860:4860::8888
+
+auto br0
+iface br0 inet manual
+
+iface br0 inet6 static
+        bridge_ports    enp4s0
+        address 2001:4dd0:fc0b:a::3
+        netmask 64
+        gateway 2001:4dd0:fc0b:a::1
+
+auto br1
+iface br1 inet manual
+
+iface br1 inet6 static
+        bridge_ports    enp2s0
+        address 2001:4dd0:fc0b:f4::3
+        netmask 64
+\end{lstlisting}

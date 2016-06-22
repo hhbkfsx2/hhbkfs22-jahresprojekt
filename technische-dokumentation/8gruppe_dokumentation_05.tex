@@ -1,1 +1,63 @@
-\section{Domain Controler: Installation und Konfiguration}
+\section{Linux-Server}
+
+\subsection{Installation}
+
+Die virtuelle Maschine wurde auf dem Hypervisor mithilfe von {\sc virtinst} und folgendem Befehl initialisiert.
+
+\begin{lstlisting}[numbers=none]
+> virt-install --connect qemu:///system --hvm --name webserver --ram 4096 --vcpus 1 \
+  --disk pool=vg0,size=100,bus=virtio,cache=none,sparse=false \
+  --cdrom=/root/isos/ubuntu-16.04-server-amd64.iso --os-type linux \
+  --network bridge=br0,model=virtio \
+  --graphics vnc,port=10123,listen=0.0.0.0,keymap=de,password=password123 \
+  --boot cdrom
+\end{lstlisting}
+
+Über die IP des Hypervisors und den Port $10123$ wurde eine Verbindung per VNC hergestellt, um anschließend die Installation per graphischem Installationsdialog durchzuführen. Englisch wurde gewählt, da es die Lingua franca in der IT darstellt. Zusätzlich wurde OpenSSH bei der Installation ausgewählt, um den Server ohne graphische Oberfläche aus der Ferne zu administrieren. Insgesamt wurden während der Installation folgende Einstellungen vorgenommen:
+\begin{itemize}
+	\item[Language] Englisch
+	\item[Territory] Germany
+	\item[Keyboard] german
+	\item[Hostname] webserver
+	\item[Domain name] fastforward.hhbk.de
+	\item[Username] user
+	\item[Password] password123
+	\item[Paritioning] Guided: use entire disk
+	\item[Choose software] Default, OpenSSH
+	\item[Grub MBR] vda
+\end{itemize}
+
+Nach der Installation wurde darüberhinaus folgende Software installiert: {\sc apache2 postfix}.
+
+\subsection{Konfiguration}
+
+Nach der Installation von Apache wurde die Defaultwebseite durch eine ersetzt, die \ql Hello World!\qr\ ausliefert.
+
+Konfigurationsdatei: {\sc /var/www/html/index.html}
+\begin{lstlisting}
+Hello World!
+\end{lstlisting}
+
+Während des Installationsdialoges von Postfix wurde \ql Internet with Smarthost\qr\ gewählt. Der SMTP-Server bleibt unkonfiguriert. Als Domain wird \q fastforward.hhbk.de\qr\ angegeben.
+
+\subsubsection{Netzwerk}
+
+Konfigurationsdatei: {\sc /etc/network/interfaces}
+\begin{lstlisting}
+source /etc/network/interfaces.d/*
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+auto ens3
+iface ens3 inet manual
+
+iface ens3 inet6 static
+        address			2001:4dd0:fc0b:a::4
+        netmask			64
+        gateway			2001:4dd0:fc0b:a::1
+        dns-nameservers	2001:4860:4860::8888
+\end{lstlisting}
+
