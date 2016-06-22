@@ -1,4 +1,4 @@
-Current configuration : 1847 bytes
+
 !
 version 12.4
 service timestamps debug datetime msec
@@ -10,8 +10,8 @@ hostname r1
 boot-start-marker
 boot-end-marker
 !
-enable secret 5 $1$gslG$BxdWYtpSq1tdYkyErKS/5.
-enable password athaeXa3xeujae6w
+enable secret 5 $1$Epnk$PT62L5jz7k392hWwAOnIz1
+enable password iejaighei4JeJie5
 !
 no aaa new-model
 !
@@ -37,7 +37,6 @@ ipv6 unicast-routing
 !
 !
 !
-!         
 !
 !
 !
@@ -47,7 +46,8 @@ ipv6 unicast-routing
 !
 !
 !
-username admin privilege 15 secret 5 $1$2OK3$Vk3gHcrGlMbpBTWT8p00l0
+!
+username admin privilege 15 secret 5 $1$n5F2$xqv08hTZqxvq/jCNU9Teq1
 !
 ! 
 !
@@ -60,6 +60,7 @@ interface Tunnel61
  ip tcp adjust-mss 1420
  ipv6 address 2001:4DD0:FF00:147F::2/64
  ipv6 enable
+ ipv6 traffic-filter from_wan_in in
  tunnel source FastEthernet0/0
  tunnel destination 78.35.24.124
  tunnel mode ipv6ip
@@ -82,6 +83,7 @@ interface FastEthernet0/1.10
  no ip route-cache
  no snmp trap link-status
  ipv6 address 2001:4DD0:FC0B:A::1/64
+ ipv6 traffic-filter dmz_in in
 !
 interface FastEthernet0/1.20
  description subinterface vlan 20
@@ -89,6 +91,7 @@ interface FastEthernet0/1.20
  no ip route-cache
  no snmp trap link-status
  ipv6 address 2001:4DD0:FC0B:F4::1/64
+ ipv6 traffic-filter lan_in in
 !
 interface Serial0/2/0
  no ip address
@@ -114,10 +117,30 @@ ipv6 route ::/0 Tunnel61
 !
 !
 !
+ipv6 access-list from_wan_in
+ permit icmp any any
+ permit tcp any any eq 22
+ permit tcp any any eq www
+ permit tcp any any eq 443
+ permit tcp any any eq smtp
+ evaluate wan-dmz-reflexive
+ evaluate wan-lan-reflexive
+!
+ipv6 access-list dmz_in
+ permit icmp any any
+ permit udp any any eq domain reflect wan-dmz-reflexive timeout 5
+ permit tcp any any eq 22 reflect wan-dmz-reflexive timeout 5
+ permit tcp any any eq www reflect wan-dmz-reflexive timeout 5
+ permit tcp any any eq 443 reflect wan-dmz-reflexive timeout 5
+ permit tcp any any eq smtp reflect wan-dmz-reflexive timeout 5
+!
+ipv6 access-list lan_in
+ permit ipv6 any any reflect wan-lan-reflexive timeout 5
+!
 control-plane
 !
 !
-!         
+!
 !
 !
 !
@@ -127,10 +150,8 @@ control-plane
 line con 0
 line aux 0
 line vty 0 4
- password beetlejuce
+ password wasted21
  login local
  transport input telnet ssh
 !
 end
-
-

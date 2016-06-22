@@ -1,1 +1,0 @@
-../scripts/generate_kapitel-tex.sh

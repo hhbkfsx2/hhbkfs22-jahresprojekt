@@ -1,31 +1,38 @@
-Virtual Machines: Windows 7 ----------------------- K. Engelhardt --- 02.06.2015
+Virtual Machines: Windows DC ---------------------- K. Engelhardt --- 02.06.2015
 ================================================================================
 
-virt-install --hvm --connect qemu:///system --name windows7 --ram 4096 --vcpus 2
---disk pool=storage,size=30,bus=virtio,cache=none,sparse=false
---disk path=/home/kayle/isos/virtio-win-0.1.102.iso,device=cdrom,perms=ro
---cdrom /home/kayle/isos/de_windows_7_professional_with_sp1_x64_dvd_u_676919.iso
---os-type windows
---os-variant win7
---network bridge=virbr0,model=virtio
---graphics vnc,port=10234,listen=0.0.0.0,keymap=de,password=foobar
---boot hd
+Der folgende Befehl wurde verwendet, um den Domain Controler als virtuelle
+Machine zu initialisieren.
 
-xtightvncviewer localhost:10234
+virt-install --hvm --connect qemu:///system --name win2012 --ram 8192 --vcpus 2 \
+--disk pool=vg0,size=300,bus=virtio,cache=none,sparse=false \
+--disk path=/root/isos/virtio-win-0.1.110.iso,device=cdrom,perms=ro \
+--cdrom /root/isos/win2012r2.iso \
+--os-type windows \
+--network bridge=br0,model=virtio \
+--graphics vnc,port=10234,listen=0.0.0.0,keymap=de,password=foobar \
+--boot cdrom,hd,menu=on
 
-Während der Installation wird sich Windows darüber beschweren, dass es keine
-Festplatte finden kann. Der Treiber befindet sich auf der virtio-CD, die wir
-eingebunden haben.
 
-Nach der Installation hat Windows noch keinen Treiber für das Netzwerk. Daher
-müssen wir über den Geräte-Manager für den Ethernet Adapter einen Treiber
-angeben. Dabei reicht es aus die virtio-CD als Quelle anzugeben.
+==============================================================================
+Installation
 
-rdesktop -kde -g95% -Twindows7 -r clipboard:PRIMARYCLIPBOARD 176.28.42.238
+	Mit graphischer Oberfläche
+	Benutzerdefiniert:
+		virtio-Treiber einbinden
 
+Windows bringt keine Treiber für virtio-Devices mit, sodass die virtio-Treiber
+des Fedora-Projektes eingebunden werden müssen.
+
+			virstor
+			NetKVM
+
+		Erkannte Disk formatieren: "Neu" > alles
+		Installation auf Partition 2	
+		User: Administrator
+		Password: Password123
 
 ================================================================================
 Sources
 
-http://www.accso.de/wp/2012/07/windows-7-auf-kvm-mit-debian-6/
 https://fedoraproject.org/wiki/Windows_Virtio_Drivers

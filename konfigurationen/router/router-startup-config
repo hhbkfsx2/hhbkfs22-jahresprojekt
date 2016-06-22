@@ -10,8 +10,8 @@ hostname r1
 boot-start-marker
 boot-end-marker
 !
-enable secret 5 $1$gslG$BxdWYtpSq1tdYkyErKS/5.
-enable password athaeXa3xeujae6w
+enable secret 5 $1$Epnk$PT62L5jz7k392hWwAOnIz1
+enable password iejaighei4JeJie5
 !
 no aaa new-model
 !
@@ -47,7 +47,7 @@ ipv6 unicast-routing
 !
 !
 !
-username admin privilege 15 secret 5 $1$2OK3$Vk3gHcrGlMbpBTWT8p00l0
+username admin privilege 15 secret 5 $1$n5F2$xqv08hTZqxvq/jCNU9Teq1
 !
 ! 
 !
@@ -127,7 +127,7 @@ control-plane
 line con 0
 line aux 0
 line vty 0 4
- password beetlejuce
+ password wasted21
  login local
  transport input telnet ssh
 !
