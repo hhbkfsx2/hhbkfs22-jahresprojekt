@@ -19,8 +19,8 @@ switch(vlan)#exit
 #interface vlan 10
 
 switch(config)#interface range gigabitEthernet f0/1-24 
-S1(config-if-range)#switchport access vlan 10
-S1(config-if-range)#end
+Switch(config-if-range)#switchport access vlan 10
+Switch(config-if-range)#end
 Switch(config)#interface vlan 10
 Switch(config-if)#ipv6 address 2001:4dd0:fc0b:a::2/64
 Switch(config-if)#no shut down
@@ -29,8 +29,8 @@ Switch(config-if)#exit
 #interface vlan 20
 
 switch(config)# interface range gigabitEthernet f0/25-46
-S1(config-if-range)# switchport access vlan 20
-S1(config-if-range)# end
+Switch(config-if-range)# switchport access vlan 20
+Switch(config-if-range)# end
 Switch(config)#interface vlan 20
 Switch(config-if)#ipv6 address 2001:4dd0:fc0b:f4::2/64
 Switch(config-if)#no shut down
@@ -43,12 +43,12 @@ Switch(config-if)#switchport trunk native vlan 20
 Switch(config-if)#switchport trunk allowed vlan 10,20
 
 #SSH
-r1(config)#ip domain-name fastforward.hhbk.de
-r1(config)#crypto key generate rsa general-keys modulus 1024
-r1(config)#username admin privilege 15 secret Willkommen2016
-r1(config)#line vty 0 4
-r1(config-line)#transport input telnet ssh
-r1(config-line)#login local
-r1(config-line)#end
+Switch(config)#ip domain-name fastforward.hhbk.de
+Switch(config)#crypto key generate rsa general-keys modulus 1024
+Switch(config)#username admin privilege 15 secret Willkommen2016
+Switch(config)#line vty 0 4
+Switch(config-line)#transport input telnet ssh
+Switch(config-line)#login local
+Switch(config-line)#end
 
 
