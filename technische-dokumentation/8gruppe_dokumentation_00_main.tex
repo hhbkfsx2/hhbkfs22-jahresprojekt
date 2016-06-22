@@ -34,7 +34,7 @@
 %%% Ende: Anpassen des Layouts: Kopf- und Fußzeilen %%%
 
 \usepackage{graphicx}
-
+\usepackage{xcolor}
 \usepackage{color}							% Ermöglicht farbigen Text: \textcolor{declared-color}{text}
 											% Bsp.: \textcolor{red}{Dieser Text ist rot}.
 
@@ -52,6 +52,20 @@ m \= m \= m \= m \= m \= m \= m \= m \= m \= m \= m \kill}
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{listings}
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\EUR}}1 {£}{{\pounds}}1
+}
 
 %%% Nuetzliche Befehle:
 %Behauptung \footnote{Beweis}; wird automatisch durchnummeriert 
@@ -84,6 +98,17 @@ linkcolor=black							% Definiert die Farbe der Links vom Inhaltsverzeichnis
 \newpage
 \pagestyle{fancy}
 \setcounter{page}{1}
+
+\section{Anmerkungen}
+
+Alle im Projekt verwendeten Passwörter wurden aus Datenschutzgründen in der Dokumentation durch die Zeichenfolge \ql Passwd123\qr\ ersetzt. Alle Kommandoaufrufe wurden zur Vereinfachung als Benutzer root in einer Bash-Shell ausgeführt.\footnote{Um Verwechslungen in der Dokumentation durch ständiges Wechseln zwischen einem Normalbenutzer und dem Superuser, sowie die Verwendung von sudo-Aufrufen und unnötige Komplikationen mit Zugriffsrechten zu vermeiden.}
+
+\begin{lstlisting}[frame=single,backgroundcolor = \color{lightgray},language=bash]
+> Kommandozeilenaufrufe werden in einem grauen Kasten in Monospace mit
+  einem vorangestellten > (Größer-als-Zeichen) dargestellt.
+\end{lstlisting}
+
+\noindent Folgt einer Zeile mit einem Kommandoaufruf das Zeichen \textbackslash\ (Backslash), so gehört die nächste Zeile ebenfalls zum Kommandoaufruf.\footnote{Auszug aus man bash: \ql A non-quoted backslash (\textbackslash) is the escape character. It preserves the literal value of the next character that follows, with the exception of <newline>. If a <newline> pair appears, and the backslash is not itself quoted, the <newline> is treated as a line continuation (that is, it is removed from the input stream and effectively ignored).\qr}.
 
 \include{2jahr_dokumentation_00_kapitel1}
 
