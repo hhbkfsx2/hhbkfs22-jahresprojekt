@@ -69,7 +69,10 @@ r1(config)#ipv6 route ::/0 Tunnel61
 #Tunnel Prüfen
 r1#show ip interface tunnel61
 r1#show ipv6 interface tunnel61
+\end{lstlisting}
 
+Konfiguration der Firewall:
+\begin{lstlisting}[numbers=none]
 #Firewalling
 r1(config)#ipv6 access-list from_wan_in
 r1(config-ipv6-acl)#permit icmp any any
