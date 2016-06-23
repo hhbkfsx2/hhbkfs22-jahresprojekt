@@ -222,3 +222,24 @@ Mit den folgenden Kommandos wurde getestet, ob die Firewall nicht freigeschaltet
  Trying 2001:4dd0:fc0b:a::4...
  telnet: connect to address 2001:4dd0:fc0b:a::4: Permission denied
 \end{lstlisting}
+
+\subsection{Test Domain-Controller}
+
+Es wurde ein virtueller Windows Client im Internen Netz eingerichtet um die Dienste des Domänen-Kontorollers zu überprüfen.   
+
+Tests:
+1. Test-User anlegen.
+2. Client in die Domäne hinzufügen.
+3. Mit dem Test-User sich am Client anmelden. 
+4. Den Server per VPN erreichen.
+
+Ergebnis:
+
+Test-1: erfolgreich
+Test-2: erfolgreich
+Test-3: erfolgreich
+Test-4: erfolgreich  
+
+Zusammenfassung:
+
+Die Tests waren alle erfolgreich, womit bewiesen wurde, das alle geforderten Dienste des Servers im interen IPv6-Netz funktionieren. 
