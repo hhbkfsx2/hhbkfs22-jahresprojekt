@@ -2,7 +2,9 @@
 
 \subsection{Erreichbarkeit intern}
 
-Mit dem folgenen Skript wurde die allgemeine Erreichbarkeit der Server aus dem LAN getestet.
+\subsubsection{Allgemeine Erreichbarkeit}
+
+Mit dem folgenden Skript wurde die allgemeine Erreichbarkeit der Server aus dem LAN getestet.
 
 Shell-Skript: {\texttt test-ping.sh}
 \begin{lstlisting}
@@ -41,33 +43,101 @@ Log-Datei: {\texttt test-ping\_20160622.log}
 ##########
 Ping-Test 20160622:
 
-2001:4dd0:fc0b:a::1		works
+2001:4dd0:fc0b:a::1			works
 2001:4dd0:fc0b:f4::1		works
-2001:4dd0:fc0b:a::2		works
+2001:4dd0:fc0b:a::2			works
 2001:4dd0:fc0b:f4::2		works
-2001:4dd0:fc0b:a::3		works
+2001:4dd0:fc0b:a::3			works
 2001:4dd0:fc0b:f4::3		works
-2001:4dd0:fc0b:a::4		works
+2001:4dd0:fc0b:a::4			works
 2001:4dd0:fc0b:f4::5		works
+\end{lstlisting}
+
+\subsubsection{Erreichbarkeit Webserver}
+
+Die interne Erreichbarkeit des Webservers wurde von der Kommandozeile per {\texttt curl} getestet.
+
+\begin{lstlisting}[numbers=none]
+> curl -v fastforward.hhbk.de
+ * Rebuilt URL to: fastforward.hhbk.de/
+ * Hostname was NOT found in DNS cache
+ *   Trying 2001:4dd0:fc0b:a::4...
+ * Connected to fastforward.hhbk.de (2001:4dd0:fc0b:a::4) port 80 (#0)
+ > GET / HTTP/1.1
+ > User-Agent: curl/7.35.0
+ > Host: fastforward.hhbk.de
+ > Accept: */*
+ > 
+ < HTTP/1.1 200 OK
+ < Date: Wed, 22 Jun 2016 14:04:00 GMT
+ * Server Apache/2.4.18 (Ubuntu) is not blacklisted
+ < Server: Apache/2.4.18 (Ubuntu)
+ < Last-Modified: Mon, 20 Jun 2016 07:40:59 GMT
+ < ETag: "d-535b0d3581c7e"
+ < Accept-Ranges: bytes
+ < Content-Length: 13
+ < Content-Type: text/html
+ < 
+ Hello World!
+ * Connection #0 to host fastforward.hhbk.de left intact
+\end{lstlisting}
+
+\subsubsection{Erreichbarkeit Mailserver}
+
+Die interne Erreichbarkeit des Mailservers wurde von der Kommandozeile per {\texttt telnet} getestet.
+
+\begin{lstlisting}[numbers=none]
+> telnet fastforward.hhbk.de 25
+ Trying 2001:4dd0:fc0b:a::4...
+ Connected to fastforward.hhbk.de.
+ Escape character is '^]'.
+ 220 webserver ESMTP Postfix (Ubuntu)
+ HELO fastforward.hhbk.de
+ 250 webserver
+ mail from: <test@test.com>
+ 250 2.1.0 Ok
+ rcpt to: <kilian@fastforward.hhbk.de>
+ 250 2.1.5 Ok
+ subject: test
+ Line one
+ Line two
+ .
+ 250 2.0.0 Ok: queued as 9BE1C6494B
+ quit
+ 221 2.0.0 Bye
+ Connection closed by foreign host.
+\end{lstlisting}
+
+\begin{lstlisting}[numbers=none]
+> tail /var/mail/kilian 
+ X-Original-To: kilian@fastforward.hhbk.de
+ Delivered-To: kilian@fastforward.hhbk.de
+ Received: from fastforward.hhbk.de (unknown [IPv6:2a02:908:1251:7160:495e:958d:9e35:f017])
+	by webserver (Postfix) with SMTP id 9BE1C6494B
+	for <kilian@fastforward.hhbk.de>; Wed, 22 Jun 2016 15:32:16 +0200 (CEST)
+
+ subject: test
+ Line one
+ Line two
 \end{lstlisting}
 
 \subsection{Erreichbarkeit extern}
 
 \subsubsection{Allgemeine Erreichbarkeit}
 
-Zum Testen der allgemeinen Erreichbarkeit von extern wurde der Ping-Test an einem Internetanschluss mit Dualstack wiederholt.
+Zum Testen der allgemeinen Erreichbarkeit von extern wurde der Ping-Test an einem Internetanschluss mit Dualstack mit der IP [2a02:908:1251:7160:495e:958d:9e35:f017] wiederholt.
 
 \begin{lstlisting}
 ##########
 Ping-Test 20160622:
 
-2001:4dd0:fc0b:a::1		works
+2001:4dd0:fc0b:a::1			works
 2001:4dd0:fc0b:f4::1		works
-2001:4dd0:fc0b:a::2		works
+2001:4dd0:fc0b:a::2			works
 2001:4dd0:fc0b:f4::2		works
-2001:4dd0:fc0b:a::3		works
+2001:4dd0:fc0b:a::3			works
 2001:4dd0:fc0b:f4::3		works
-2001:4dd0:fc0b:a::4		works
+2001:4dd0:fc0b:a::4			works
 2001:4dd0:fc0b:f4::5		works
 \end{lstlisting}
 
