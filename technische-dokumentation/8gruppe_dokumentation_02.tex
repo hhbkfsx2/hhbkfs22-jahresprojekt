@@ -4,7 +4,6 @@ Abweichend von der einleitenden Anmerkung wurden folgende Befehle unter Ciscos i
 
 \begin{lstlisting}[numbers=none]
 #Basics
-r1#conf t
 r1(config)#enable secret password123
 r1(config)#enable password password123
 r1(config)#ipv6 unicast-routing
@@ -54,6 +53,8 @@ r1(config)#ip route 0.0.0.0 0.0.0.0 fastethernet 0/0
 r1(config)#ipv6 route 2001:4dd0:fc0b:a::/64 FastEthernet0/1.10
 r1(config)#ipv6 route 2001:4dd0:fc0b:f4::/64 FastEthernet0/1.20
 
+
+#SixXS Tunnel
 r1(config)#interface Tunnel61
 r1(config-if)#description 6in4 tunnel to SixXS
 r1(config-if)#no ip address
@@ -66,9 +67,72 @@ r1(config-if)#tunnel mode ipv6ip
 r1(config-if)#exit
 r1(config)#ipv6 route ::/0 Tunnel61
 
+
 #Tunnel Prüfen
-r1#show ip interface tunnel61
-r1#show ipv6 interface tunnel61
+r1(config)#do show ip interface tunnel61
+r1(config)#do show ipv6 interface tunnel61
+
+
+#Firewalling
+
+#WAN In
+
+r1(config)#ipv6 access-list from_wan_in
+r1(config-ipv6-acl)#permit icmp any any
+r1(config-ipv6-acl)#permit tcp any any eq 22 reflect dmz-wan-reflexive timeout 300
+r1(config-ipv6-acl)#permit tcp any any eq www reflect dmz-wan-reflexive timeout 5
+r1(config-ipv6-acl)#permit tcp any any eq 443 reflect dmz-wan-reflexive timeout 5
+r1(config-ipv6-acl)#permit tcp any any eq smtp reflect dmz-wan-reflexive timeout 5
+r1(config-ipv6-acl)#evaluate wan-dmz-reflexive
+r1(config-ipv6-acl)#evaluate wan-lan-reflexive
+r1(config-ipv6-acl)#exit
+
+r1(config)#interface Tunnel61
+r1(config-if)#ipv6 traffic-filter from_wan_in in
+
+
+#DMZ In
+
+r1(config)#ipv6 access-list dmz_in
+r1(config-ipv6-acl)#permit icmp any any
+r1(config-ipv6-acl)#permit udp any any eq domain reflect wan-dmz-reflexive timeout 5
+r1(config-ipv6-acl)#permit tcp any any eq 22 reflect wan-dmz-reflexive timeout 5
+r1(config-ipv6-acl)#permit tcp any any eq www reflect wan-dmz-reflexive timeout 5
+r1(config-ipv6-acl)#permit tcp any any eq 443 reflect wan-dmz-reflexive timeout 5
+r1(config-ipv6-acl)#permit tcp any any eq smtp reflect wan-dmz-reflexive timeout 5
+r1(config-ipv6-acl)#evaluate dmz-wan-reflexive
+r1(config-ipv6-acl)#exit
+
+r1(config)#interface FastEthernet0/1.10
+r1(config-if)#ipv6 traffic-filter dmz_in in
+
+
+#LAN In
+
+r1(config)#ipv6 access-list lan_in
+r1(config-ipv6-acl)#permit ipv6 any any reflect wan-lan-reflexive timeout 5
+r1(config-ipv6-acl)#exit
+
+r1(config)#interface FastEthernet0/1.20
+r1(config-if)#ipv6 traffic-filter lan_in in
+
+
+#IPv4 WAN In
+r1(config)#ip access-list extended from_wan_v4_in
+r1(config-ext-nacl)#permit ip host 78.35.24.124 any
+r1(config-ext-nacl)#permit tcp any any eq 22
+r1(config-ext-nacl)#exit
+
+r1(config)#interface FastEthernet0/0
+r1(config-if)#ip access-group from_wan_v4_in in
+r1(config-ext-nacl)#permit icmp any any
+r1(config-ext-nacl)#exit
+
+
+#Firewall Regeln auslesen
+r1(config)#do show ipv6 access-list
+r1(config)#do show ip access-list
+
 \end{lstlisting}
 
 Konfiguration der Firewall:

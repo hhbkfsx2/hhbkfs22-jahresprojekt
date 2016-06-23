@@ -116,7 +116,6 @@ r1(config-if)#ipv6 traffic-filter lan_in in
 r1(config)#ip access-list extended from_wan_v4_in
 r1(config-ext-nacl)#permit ip host 78.35.24.124 any
 r1(config-ext-nacl)#permit tcp any any eq 22
-
 r1(config-ext-nacl)#exit
 
 r1(config)#interface FastEthernet0/0
