@@ -1,11 +1,14 @@
 Konfiguration des Windows-Servers
 
 1. Es wurde eine Standard Windows Server 2012 R2 Installation durchgeführt.
-IPv6 Adresse vergeben: 2001:4dd0:fc0b:f4::5/64
+2. IPv6 Adresse vergeben:
+	PowerShell:
+	New-NetIPAdress -IPAdress 2001:4dd0:fc0b:f4::6 -AdressFamily IPV6 -InterfaceIndex 12 -Defaultgateway 2001:4dd0:fc0b:f4::1 -PrefixLength 64
+	SET-DNSClientServerAddress -InterfaceIndex 12 -ServerAdresses 2001:4dd0:fc0b:f4:5
 
-2. Installation des Active- Directory Diensts installiert und den Server als Domänen Kontroller eingestellt.
-3. RDP Dienst installiert.
-4. Installation des DNS-Diensts 
+3. Installation des Active- Directory Diensts installiert und den Server als Domänen Kontroller eingestellt.
+4. RDP Dienst installiert.
+5. Installation des DNS-Diensts 
 	Notwendig um Rechner zum AD hinzuzufügen
 	Hier ist zu beachten, dass der DNS-Dienst für IPV6 eingestellt wird.
 
