@@ -38,17 +38,31 @@ fastforward.hhbk.de.		MX		fastforward.hhbk.de
 
 \subsection{SixXS}
 
+\begin{tabular}{|l|l|}
+\hline
+Beschreibung			& Daten						\\
+\hline
+Router IP				& 212.72.180.241		 	\\
+SixXS PoP IPv4			& 78.35.24.124			 	\\
+IPv6 Prefix				& /64					 	\\	
+Lokaler Router	IPv6	& 2001:4dd0:ff00:147f::2 	\\
+SixXS Router IPv6 		& 2001:4dd0:ff00:147f::1	\\
+TCP Adjust-MSS			& 1420						\\
+Tunnel Mode				& ipv6ip					\\
+\hline
+\end{tabular}
+
 \subsection{Adresskonzept}
 
 \begin{tabular}{|l|l|l|}
 \hline
-					& LAN: VLAN 20					& DMZ: VLAN 10 \\
+						& LAN: VLAN 20					& DMZ: VLAN 10 \\
 \hline
-Router				& 2001:4dd0:fc0b:f4::1/128		& 2001:4dd0:fc0b:a::1/128 \\
-Switch				& 2001:4dd0:fc0b:f4::2/128		& 2001:4dd0:fc0b:a::2/128 \\
-Hypervisor			& 2001:4dd0:fc0b:f4::3/128		& 2001:4dd0:fc0b:a::3/128 \\	
+Router					& 2001:4dd0:fc0b:f4::1/128		& 2001:4dd0:fc0b:a::1/128 \\
+Switch					& 2001:4dd0:fc0b:f4::2/128		& 2001:4dd0:fc0b:a::2/128 \\
+Hypervisor				& 2001:4dd0:fc0b:f4::3/128		& 2001:4dd0:fc0b:a::3/128 \\	
 Linux-Server			&								& 2001:4dd0:fc0b:a::4/128 \\
-Domain Controler 	& 2001:4dd0:fc0b:f4::5/128		& \\
+Domain Controler 		& 2001:4dd0:fc0b:f4::5/128		& \\
 Client01				& 2001:4dd0:fc0b:f4::a/128		& \\
 Client02				& 2001:4dd0:fc0b:f4::b/128		& \\
 Client03				& 2001:4dd0:fc0b:f4::c/128		& \\
