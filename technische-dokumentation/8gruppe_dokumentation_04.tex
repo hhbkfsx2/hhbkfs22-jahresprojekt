@@ -22,7 +22,7 @@ Nach der Installation wurde darüberhinaus folgende Software installiert: {\text
 
 \subsubsection{libvirt}
 
-Zunächst muss der QEMU-Treiber von {\texttt libvirt} konfiguriert werden, damit dieser weiß, mit welchem User QEMU ausgeführt wird. 
+Zunächst muss der QEMU-Treiber von {\texttt libvirt} konfiguriert werden, damit dieser weiß, mit welchem User QEMU ausgeführt wird.\newline
 
 Konfigurationsdatei: {\texttt /etc/libvirt/qemu.conf}
 \begin{lstlisting}
@@ -30,7 +30,7 @@ user = "root"
 group = "root"
 \end{lstlisting}
 
-Anschließend wird die HDD mit 500GB formatiert und die Volume Group {\texttt vg0} definiert.
+Anschließend wird die HDD mit 500GB formatiert und die Volume Group {\texttt vg0} definiert.\newline
 
 \begin{lstlisting}[numbers=none]
 > parted /dev/sda
@@ -41,8 +41,9 @@ Anschließend wird die HDD mit 500GB formatiert und die Volume Group {\texttt vg
 > vgcreate vg0 /dev/sda1
 \end{lstlisting} 
 
-Die Volume Group {\texttt vg0} wird verwendet, um den Pool {\texttt vg0} einzurichten. Die folgende Konfiguration muss erstellt werden, um anschließend mit den aufgeführten Befehlen den Pool zu aktivieren.       
+Die Volume Group {\texttt vg0} wird verwendet, um den Pool {\texttt vg0} einzurichten. Die folgende Konfiguration muss erstellt werden, um anschließend mit den aufgeführten Befehlen den Pool zu aktivieren.
 
+\newpage
 Konfigurationsdatei: {\texttt /etc/libvirt/qemu/storage/vg0.xml}
 \begin{lstlisting}
 <pool type='logical'>
@@ -63,7 +64,7 @@ Konfigurationsdatei: {\texttt /etc/libvirt/qemu/storage/vg0.xml}
 
 \subsubsection{Netzwerk}
 
-Der Hypervisor wurde mit zwei Interfaces an den Switch angebunden. Das Interface {\texttt enp4s0} wurde an einen Port mit VLAN 10 angeschlossen und {\texttt enp2s0} an einen Port mit VLAN 20. Dadurch ist es später einfacher, die virtuellen Server einem VLAN zuzuordnen (s. Kapitel \ql Linux-Server\qr). Für DNS wurde ein Server von Google ausgewählt.
+Der Hypervisor wurde mit zwei Interfaces an den Switch angebunden. Das Interface {\texttt enp4s0} wurde an einen Port mit VLAN 10 angeschlossen und {\texttt enp2s0} an einen Port mit VLAN 20. Dadurch ist es später einfacher, die virtuellen Server einem VLAN zuzuordnen (s. Kapitel \ql Linux-Server\qr). Für DNS wurde ein Server von Google ausgewählt.\newline
 
 Konfigurationsdatei: {\texttt /etc/network/interfaces}
 \begin{lstlisting}

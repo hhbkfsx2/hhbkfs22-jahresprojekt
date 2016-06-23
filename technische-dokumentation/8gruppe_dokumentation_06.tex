@@ -15,6 +15,19 @@ Die virtuelle Maschine wurde auf dem Hypervisor mithilfe von {\texttt virtinst} 
   --boot cdrom,hd,menu=on
 \end{lstlisting}
 
-Anschließend wurde sich per VNC verbunden, um den Domain Controler per graphischem Installationsdialog zu installieren. Dabei wurde eine Installation mit graphischer Oberfläche gewählt, da dies der üblichen Administrationsweise unter Windows entspricht. Während der Installation müssen über die zusätzlich eingebundene CD \ql virtio-win\qr\ die Treiber für das Netzwerk ({\texttt NetKVM > WIN2012R2 > amd64}) und die Festplatte ({\texttt viostor > WIN2012	R2 > amd64})installiert werden. Bei der Partitionierung wurde die gesamte Festplatte gewählt und abschließend dem Administrator das Passwort \ql password123\qr\ gegeben.
+Anschließend wurde sich per VNC verbunden, um den Domain Controler per graphischem Installationsdialog zu installieren. Dabei wurde eine Installation mit graphischer Oberfläche gewählt, da dies der üblichen Administrationsweise unter Windows entspricht. Während der Installation müssen über die zusätzlich eingebundene CD \ql virtio-win\qr\ die Treiber für das Netzwerk ({\texttt NetKVM > WIN2012R2 > amd64}) und die Festplatte ({\texttt viostor > WIN2012	R2 > amd64}) installiert werden. Bei der Partitionierung wurde die gesamte Festplatte gewählt und abschließend dem Administrator das Passwort \ql password123\qr\ gegeben.
 
 \subsection{Konfiguration}
+
+\begin{itemize}
+	\item Es wurde eine Standard Windows Server 2012 R2 Installation durchgeführt.
+	\item IPv6 Adresse vergeben:
+	\item PowerShell: {\texttt New-NetIPAdress -IPAdress 2001:4dd0:fc0b:f4::6 -AdressFamily IPV6 -InterfaceIndex 12 -Defaultgateway 2001:4dd0:fc0b:f4::1 -PrefixLength 64
+	SET-DNSClientServerAddress -InterfaceIndex 12 -ServerAdresses 2001:4dd0:fc0b:f4:5}
+	\item Installation des Active-Directory-Diensts installiert und den Server als Domänenontroller eingestellt.
+	\item RDP Dienst installiert.
+	\item Installation des DNS-Diensts: Notwendig um Rechner zum AD hinzuzufügen
+	Hier ist zu beachten, dass der DNS-Dienst für IPV6 eingestellt wird.
+\end{itemize}
+
+Sämtliche Installationen wurden mit Setup-Wizards installiert ohne spezielle Einstellungen.
