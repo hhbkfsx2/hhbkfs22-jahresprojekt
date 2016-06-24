@@ -53,7 +53,6 @@ r1(config)#ip route 0.0.0.0 0.0.0.0 fastethernet 0/0
 r1(config)#ipv6 route 2001:4dd0:fc0b:a::/64 FastEthernet0/1.10
 r1(config)#ipv6 route 2001:4dd0:fc0b:f4::/64 FastEthernet0/1.20
 
-
 #SixXS Tunnel
 r1(config)#interface Tunnel61
 r1(config-if)#description 6in4 tunnel to SixXS
@@ -66,7 +65,6 @@ r1(config-if)#tunnel destination 78.35.24.124
 r1(config-if)#tunnel mode ipv6ip
 r1(config-if)#exit
 r1(config)#ipv6 route ::/0 Tunnel61
-
 
 #Tunnel Prüfen
 r1(config)#do show ip interface tunnel61
@@ -103,6 +101,7 @@ r1(config-ipv6-acl)#permit tcp any any eq www reflect wan-dmz-reflexive timeout 
 r1(config-ipv6-acl)#permit tcp any any eq 443 reflect wan-dmz-reflexive timeout 5
 r1(config-ipv6-acl)#permit tcp any any eq smtp reflect wan-dmz-reflexive timeout 5
 r1(config-ipv6-acl)#evaluate dmz-wan-reflexive
+r1(config-ipv6-acl)#evaluate wan-lan-reflexive
 r1(config-ipv6-acl)#exit
 
 r1(config)#interface FastEthernet0/1.10

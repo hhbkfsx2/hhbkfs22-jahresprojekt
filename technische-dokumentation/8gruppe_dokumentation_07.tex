@@ -1,4 +1,241 @@
-\section{Windows Client}
+\section{Tests}
 
-\subsection{Installation}
-\subsection{Konfiguration}
+\subsection{Erreichbarkeit intern}
+
+\subsubsection{Allgemeine Erreichbarkeit}
+
+Mit dem folgenden Skript wurde die allgemeine Erreichbarkeit der Server aus dem LAN getestet.\newline
+
+Shell-Skript: {\texttt test-ping.sh}
+\begin{lstlisting}
+#!/bin/bash
+
+#killall dhclient
+
+RIP1="2001:4dd0:fc0b:a::1"
+RIP2="2001:4dd0:fc0b:f4::1"
+SIP1="2001:4dd0:fc0b:a::2"
+SIP2="2001:4dd0:fc0b:f4::2"
+KVM1="2001:4dd0:fc0b:a::3"
+KVM2="2001:4dd0:fc0b:f4::3"
+SRV="2001:4dd0:fc0b:a::4"
+DC="2001:4dd0:fc0b:f4::5"
+
+LOG="test-ping\_$(date +%Y%d%m).log"
+
+IP="${RIP1} ${RIP2} ${SIP1} ${SIP2} ${KVM1} ${KVM2} ${SRV} ${DC}"
+
+echo -e "##########" >> ${LOG}
+echo -e "Ping-Test $(date +%Y%m%d):\n" >> ${LOG}
+for i in ${IP}; do
+	ping6 -c 1 ${i} 2> /dev/null
+	if [[ $? -eq 0 ]]; then
+		echo -e "${i}\t\tworks" >> ${LOG}
+	else
+		echo -e "${i}\t\tfailed!" >> ${LOG}
+	fi
+done	
+echo -e "\n" >> ${LOG}
+\end{lstlisting}
+
+Log-Datei: {\texttt test-ping\_20160622.log}
+\begin{lstlisting}
+##########
+Ping-Test 20160622:
+
+2001:4dd0:fc0b:a::1			works
+2001:4dd0:fc0b:f4::1		works
+2001:4dd0:fc0b:a::2			works
+2001:4dd0:fc0b:f4::2		works
+2001:4dd0:fc0b:a::3			works
+2001:4dd0:fc0b:f4::3		works
+2001:4dd0:fc0b:a::4			works
+2001:4dd0:fc0b:f4::5		works
+\end{lstlisting}
+
+\newpage	
+\subsubsection{Erreichbarkeit Webserver}
+
+Die interne Erreichbarkeit des Webservers wurde von der Kommandozeile per {\texttt curl} getestet.\newline
+
+\begin{lstlisting}[numbers=none]
+> curl -v fastforward.hhbk.de
+ * Rebuilt URL to: fastforward.hhbk.de/
+ * Hostname was NOT found in DNS cache
+ *   Trying 2001:4dd0:fc0b:a::4...
+ * Connected to fastforward.hhbk.de (2001:4dd0:fc0b:a::4) port 80 (#0)
+ > GET / HTTP/1.1
+ > User-Agent: curl/7.35.0
+ > Host: fastforward.hhbk.de
+ > Accept: */*
+ > 
+ < HTTP/1.1 200 OK
+ < Date: Wed, 22 Jun 2016 14:04:00 GMT
+ * Server Apache/2.4.18 (Ubuntu) is not blacklisted
+ < Server: Apache/2.4.18 (Ubuntu)
+ < Last-Modified: Mon, 20 Jun 2016 07:40:59 GMT
+ < ETag: "d-535b0d3581c7e"
+ < Accept-Ranges: bytes
+ < Content-Length: 13
+ < Content-Type: text/html
+ < 
+ Hello World!
+ * Connection #0 to host fastforward.hhbk.de left intact
+\end{lstlisting}
+
+\subsubsection{Erreichbarkeit Mailserver}
+
+Die interne Erreichbarkeit des Mailservers wurde von der Kommandozeile per {\texttt telnet} getestet.\newline
+
+\begin{lstlisting}[numbers=none]
+> telnet fastforward.hhbk.de 25
+ Trying 2001:4dd0:fc0b:a::4...
+ Connected to fastforward.hhbk.de.
+ Escape character is '^]'.
+ 220 webserver ESMTP Postfix (Ubuntu)
+ HELO fastforward.hhbk.de
+ 250 webserver
+ mail from: <test@test.com>
+ 250 2.1.0 Ok
+ rcpt to: <kilian@fastforward.hhbk.de>
+ 250 2.1.5 Ok
+ subject: test
+ Line one
+ Line two
+ .
+ 250 2.0.0 Ok: queued as 9BE1C6494B
+ quit
+ 221 2.0.0 Bye
+ Connection closed by foreign host.
+\end{lstlisting}
+
+\begin{lstlisting}[numbers=none]
+> tail /var/mail/kilian 
+ X-Original-To: kilian@fastforward.hhbk.de
+ Delivered-To: kilian@fastforward.hhbk.de
+ Received: from fastforward.hhbk.de (unknown [IPv6:2a02:908:1251:7160:495e:958d:9e35:f017])
+	by webserver (Postfix) with SMTP id 9BE1C6494B
+	for <kilian@fastforward.hhbk.de>; Wed, 22 Jun 2016 15:32:16 +0200 (CEST)
+
+ subject: test
+ Line one
+ Line two
+\end{lstlisting}
+
+\subsection{Erreichbarkeit extern}
+
+\subsubsection{Allgemeine Erreichbarkeit}
+
+Zum Testen der allgemeinen Erreichbarkeit von extern wurde der Ping-Test an einem Internetanschluss mit Dualstack mit der IP [2a02:908:1251:7160:495e:958d:9e35:f017] wiederholt.\newline
+
+\begin{lstlisting}
+##########
+Ping-Test 20160622:
+
+2001:4dd0:fc0b:a::1			works
+2001:4dd0:fc0b:f4::1		works
+2001:4dd0:fc0b:a::2			works
+2001:4dd0:fc0b:f4::2		works
+2001:4dd0:fc0b:a::3			works
+2001:4dd0:fc0b:f4::3		works
+2001:4dd0:fc0b:a::4			works
+2001:4dd0:fc0b:f4::5		works
+\end{lstlisting}
+
+\subsubsection{Erreichbarkeit Webserver}
+
+Die Erreichbarkeit des Webservers wurde von der Kommandozeile per {\texttt curl} getestet.\newline
+
+\begin{lstlisting}[numbers=none]
+> curl -v fastforward.hhbk.de
+ * Rebuilt URL to: fastforward.hhbk.de/
+ * Hostname was NOT found in DNS cache
+ *   Trying 2001:4dd0:fc0b:a::4...
+ * Connected to fastforward.hhbk.de (2001:4dd0:fc0b:a::4) port 80 (#0)
+ > GET / HTTP/1.1
+ > User-Agent: curl/7.35.0
+ > Host: fastforward.hhbk.de
+ > Accept: */*
+ > 
+ < HTTP/1.1 200 OK
+ < Date: Wed, 22 Jun 2016 15:03:00 GMT
+ * Server Apache/2.4.18 (Ubuntu) is not blacklisted
+ < Server: Apache/2.4.18 (Ubuntu)
+ < Last-Modified: Mon, 20 Jun 2016 07:40:59 GMT
+ < ETag: "d-535b0d3581c7e"
+ < Accept-Ranges: bytes
+ < Content-Length: 13
+ < Content-Type: text/html
+ < 
+ Hello World!
+ * Connection #0 to host fastforward.hhbk.de left intact
+\end{lstlisting}
+
+\newpage
+\subsubsection{Erreichbarkeit Mailserver}
+
+Die Erreichbarkeit des Mailservers wurde von der Kommandozeile per {\texttt telnet} getestet.\newline
+
+\begin{lstlisting}[numbers=none]
+> telnet fastforward.hhbk.de 25
+ Trying 2001:4dd0:fc0b:a::4...
+ Connected to fastforward.hhbk.de.
+ Escape character is '^]'.
+ 220 webserver ESMTP Postfix (Ubuntu)
+ HELO fastforward.hhbk.de
+ 250 webserver
+ mail from: <test@test.com>
+ 250 2.1.0 Ok
+ rcpt to: <kilian@fastforward.hhbk.de>
+ 250 2.1.5 Ok
+ subject: test
+ Line one
+ Line two
+ .
+ 250 2.0.0 Ok: queued as 1BF1B6099B
+ quit
+ 221 2.0.0 Bye
+ Connection closed by foreign host.
+\end{lstlisting}
+
+\begin{lstlisting}[numbers=none]
+> tail /var/mail/kilian 
+ X-Original-To: kilian@fastforward.hhbk.de
+ Delivered-To: kilian@fastforward.hhbk.de
+ Received: from fastforward.hhbk.de (unknown [IPv6:2a02:908:1251:7160:495e:958d:9e35:f017])
+	by webserver (Postfix) with SMTP id 1BF1B6099B
+	for <kilian@fastforward.hhbk.de>; Wed, 22 Jun 2016 16:49:47 +0200 (CEST)
+
+ subject: test
+ Line one
+ Line two
+\end{lstlisting}
+
+\subsection{Firewall}
+
+Mit den folgenden Kommandos wurde getestet, ob die Firewall nicht freigeschaltete Ports blockiert. Dazu wurde auf dem Linux-Server mit {\texttt netcat} ein Port geöffnet und von extern geprüft, ob sich zu diesem Port verbunden werden kann.\newline
+
+\begin{lstlisting}[numbers=none]
+ #Listening auf dem Linux-Server
+> netcat -l -p 1337
+
+ #Vom externen Host
+> telnet 2001:4dd0:fc0b:a::4 1337
+ Trying 2001:4dd0:fc0b:a::4...
+ telnet: connect to address 2001:4dd0:fc0b:a::4: Permission denied
+\end{lstlisting}
+
+\subsection{Test Domain-Controller}
+
+Es wurde ein virtueller Windows Client im internen Netz eingerichtet, um die Dienste des Domänen-Kontorollers zu überprüfen. Die Tests waren alle erfolgreich, womit bewiesen wurde, das alle geforderten Dienste des Servers im interen IPv6-Netz funktionieren.\newline
+
+\noindent \begin{tabular}{|l|l|}
+\hline
+Test & Ergebnis \\
+\hline
+Test-User anlegen & Erfolgreich \\
+Client in die Domäne hinzufügen & Erfolgreich \\
+Mit dem Test-User sich am Client anmelden & Erfolgreich \\
+Den Server per VPN erreichen & Erfolgreich \\
+\hline
+\end{tabular}
