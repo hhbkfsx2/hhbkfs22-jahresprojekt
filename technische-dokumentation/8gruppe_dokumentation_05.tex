@@ -2,7 +2,7 @@
 
 \subsection{Installation}
 
-Die virtuelle Maschine wurde auf dem Hypervisor mithilfe von {\texttt virtinst} und folgendem Befehl initialisiert.
+Die virtuelle Maschine wurde auf dem Hypervisor mithilfe von {\texttt virtinst} und folgendem Befehl initialisiert. Die Bridge \ql br0\qr\ dient dazu, die VM an das physische Netzwerk anzubinden.\newline
 
 \begin{lstlisting}[numbers=none]
 > virt-install --connect qemu:///system --hvm --name webserver --ram 4096 --vcpus 1 \
@@ -31,15 +31,14 @@ Nach der Installation wurde darüberhinaus folgende Software installiert: {\text
 
 \subsection{Konfiguration}
 
-Nach der Installation von Apache wurde die Defaultwebseite durch eine ersetzt, die \ql Hello World!\qr\ ausliefert.
+Nach der Installation von Apache wurde die Defaultwebseite durch eine ersetzt, die \ql Hello World!\qr\ ausliefert. Während des Installationsdialoges von Postfix wurde \ql Internet with Smarthost\qr\ gewählt. Der SMTP-Server bleibt unkonfiguriert. Als Domain wird \ql fastforward.hhbk.de\qr\ angegeben.\newline
 
 Konfigurationsdatei: {\texttt /var/www/html/index.html}
 \begin{lstlisting}
 Hello World!
 \end{lstlisting}
 
-Während des Installationsdialoges von Postfix wurde \ql Internet with Smarthost\qr\ gewählt. Der SMTP-Server bleibt unkonfiguriert. Als Domain wird \ql fastforward.hhbk.de\qr\ angegeben.
-
+\newpage
 \subsubsection{Netzwerk}
 
 Konfigurationsdatei: {\texttt /etc/network/interfaces}
