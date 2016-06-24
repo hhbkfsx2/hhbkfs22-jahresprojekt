@@ -96,6 +96,7 @@ r1(config-ipv6-acl)#permit tcp any any eq www reflect wan-dmz-reflexive timeout 
 r1(config-ipv6-acl)#permit tcp any any eq 443 reflect wan-dmz-reflexive timeout 5
 r1(config-ipv6-acl)#permit tcp any any eq smtp reflect wan-dmz-reflexive timeout 5
 r1(config-ipv6-acl)#evaluate dmz-wan-reflexive
+r1(config-ipv6-acl)#evaluate wan-lan-reflexive
 r1(config-ipv6-acl)#exit
 
 r1(config)#interface FastEthernet0/1.10

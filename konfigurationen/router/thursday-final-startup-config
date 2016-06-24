@@ -140,6 +140,7 @@ ipv6 access-list dmz_in
  permit tcp any any eq 443 reflect wan-dmz-reflexive timeout 5
  permit tcp any any eq smtp reflect wan-dmz-reflexive timeout 5
  evaluate dmz-wan-reflexive
+ sequence 90 evaluate wan-lan-reflexive
 !
 ipv6 access-list lan_in
  permit ipv6 any any reflect wan-lan-reflexive timeout 5
